@@ -52,7 +52,7 @@
         body {
             background-color: var(--bg);
             color: var(--text-main);
-            padding-bottom: 90px;
+            padding-bottom: 95px;
             min-height: 100vh;
             line-height: 1.5;
         }
@@ -103,6 +103,12 @@
             font-weight: 600;
         }
 
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .btn-icon {
             background: var(--surface-alt);
             border: 1px solid var(--border);
@@ -117,8 +123,25 @@
             font-size: 1.2rem;
         }
 
-        .btn-icon:active {
-            background: var(--border);
+        .btn-cloud {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            color: #1d4ed8;
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 0.78rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            min-height: 42px;
+        }
+
+        .dark-mode .btn-cloud {
+            background: #1e3a8a;
+            border-color: #3b82f6;
+            color: #dbeafe;
         }
 
         .container {
@@ -127,37 +150,47 @@
             padding: 14px;
         }
 
-        /* Alerta de Acesso no Celular */
-        .mobile-tip-banner {
-            background: linear-gradient(135deg, #eff6ff, #dbeafe);
-            border: 1px solid #bfdbfe;
+        /* Banner de Troca de Nome */
+        .name-banner {
+            background: var(--surface);
+            border: 1px solid var(--border);
             border-radius: var(--radius-md);
-            padding: 12px 14px;
-            margin-bottom: 16px;
-            font-size: 0.82rem;
-            color: #1e40af;
+            padding: 10px 14px;
+            margin-bottom: 14px;
             display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            line-height: 1.45;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            flex-wrap: wrap;
+            box-shadow: var(--shadow);
+            font-size: 0.85rem;
         }
 
-        .dark-mode .mobile-tip-banner {
-            background: #111e38;
-            border-color: #1e3a8a;
-            color: #93c5fd;
+        .name-highlight {
+            color: var(--primary);
+            font-weight: 800;
         }
 
-        /* Hero Personalizado para Camily */
+        .btn-name-switch {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.82rem;
+            text-decoration: underline;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        /* Hero Box */
         .hero-box {
             background: linear-gradient(135deg, #1e3a8a, #312e81, #6b21a8);
             color: white;
             border-radius: var(--radius-lg);
             padding: 22px 18px;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
             box-shadow: 0 10px 20px -5px rgba(30,58,138,0.3);
             position: relative;
-            overflow: hidden;
         }
 
         .hero-tag {
@@ -186,26 +219,167 @@
 
         .hero-metrics-row {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
             background: rgba(0,0,0,0.25);
             border-radius: var(--radius-md);
-            padding: 10px;
+            padding: 10px 6px;
             text-align: center;
         }
 
         .hero-m-val {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 900;
         }
 
         .hero-m-lbl {
-            font-size: 0.68rem;
+            font-size: 0.65rem;
             opacity: 0.85;
             text-transform: uppercase;
         }
 
-        /* Estatísticas */
+        /* WIDGET DE META DIÁRIA & CONTADOR DE PONTUAÇÃO */
+        .goal-card {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+            margin-bottom: 18px;
+            box-shadow: var(--shadow);
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .goal-card.completed {
+            border-color: #10b981;
+            background: linear-gradient(to bottom, var(--surface), #f0fdf4);
+            box-shadow: 0 6px 15px rgba(16,185,129,0.15);
+        }
+
+        .dark-mode .goal-card.completed {
+            background: linear-gradient(to bottom, var(--surface), #064e3b);
+            border-color: #10b981;
+        }
+
+        .goal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .goal-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .goal-title {
+            font-size: 1.05rem;
+            font-weight: 900;
+            color: var(--text-main);
+        }
+
+        .points-badge {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            font-weight: 900;
+            font-size: 0.95rem;
+            padding: 6px 14px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 5px rgba(217,119,6,0.3);
+        }
+
+        /* Seletor de Meta Rápida */
+        .goal-picker-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 14px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: none;
+        }
+
+        .goal-picker-row::-webkit-scrollbar {
+            display: none;
+        }
+
+        .goal-pill {
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.15s ease;
+        }
+
+        .goal-pill.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .goal-progress-wrap {
+            margin-bottom: 10px;
+        }
+
+        .goal-progress-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .goal-progress-track {
+            height: 14px;
+            background: var(--surface-alt);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .goal-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #10b981);
+            width: 0%;
+            border-radius: 10px;
+            transition: width 0.4s ease;
+        }
+
+        .goal-card.completed .goal-progress-bar {
+            background: linear-gradient(90deg, #10b981, #059669);
+        }
+
+        .goal-msg {
+            font-size: 0.86rem;
+            font-weight: 600;
+            line-height: 1.45;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        .goal-card.completed .goal-msg {
+            color: #047857;
+            font-weight: 800;
+        }
+
+        .dark-mode .goal-card.completed .goal-msg {
+            color: #6ee7b7;
+        }
+
+        /* Grid de Estatísticas */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -228,6 +402,12 @@
             align-items: center;
             gap: 10px;
             box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: transform 0.15s ease;
+        }
+
+        .stat-card:active {
+            transform: scale(0.98);
         }
 
         .stat-icon {
@@ -317,12 +497,32 @@
             white-space: nowrap;
             cursor: pointer;
             flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .pill-btn.active {
             background: var(--primary);
             color: white;
             border-color: var(--primary);
+        }
+
+        .pill-btn.pill-erradas.active {
+            background: var(--danger);
+            border-color: var(--danger);
+        }
+
+        .pill-btn.pill-acertos.active {
+            background: var(--success);
+            border-color: var(--success);
+        }
+
+        .pill-badge {
+            background: rgba(0,0,0,0.12);
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.72rem;
         }
 
         /* Card da Questão */
@@ -400,7 +600,7 @@
             white-space: pre-line;
         }
 
-        /* Botões de Alternativa Touch-Friendly */
+        /* Botões de Alternativa */
         .options-box {
             display: flex;
             flex-direction: column;
@@ -472,7 +672,7 @@
             border-color: var(--danger);
         }
 
-        /* Ilustração e Feedback */
+        /* Feedback da Questão e Análise do Erro */
         .fb-box {
             margin-top: 14px;
             padding: 14px;
@@ -489,6 +689,40 @@
 
         .fb-box.wrong {
             border-color: var(--danger);
+        }
+
+        .err-analysis-box {
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+            font-size: 0.86rem;
+            line-height: 1.45;
+        }
+
+        .dark-mode .err-analysis-box {
+            background: #450a0a;
+            border-color: #7f1d1d;
+            color: #fecaca;
+        }
+
+        .correct-explanation-box {
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            color: #065f46;
+            font-size: 0.86rem;
+            line-height: 1.45;
+        }
+
+        .dark-mode .correct-explanation-box {
+            background: #022c22;
+            border-color: #065f46;
+            color: #a7f3d0;
         }
 
         .illustration-wrap {
@@ -604,6 +838,50 @@
             border-left: 3px solid var(--primary);
         }
 
+        /* Seção Histórico Diário */
+        .history-controls {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 14px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .date-select {
+            width: 100%;
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            border: 1.5px solid var(--border);
+            background: var(--surface-alt);
+            color: var(--text-main);
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            outline: none;
+        }
+
+        .clean-actions-box {
+            background: var(--surface-alt);
+            border-radius: var(--radius-md);
+            padding: 14px;
+            margin-top: 14px;
+            border: 1px solid var(--border);
+        }
+
+        .slider-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 10px 0;
+        }
+
+        .range-slider {
+            flex: 1;
+            accent-color: var(--danger);
+            cursor: pointer;
+        }
+
         /* Navegação Inferior */
         .nav-bottom {
             position: fixed;
@@ -647,6 +925,91 @@
         .nav-txt {
             font-size: 0.68rem;
         }
+
+        /* Modais */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 200;
+            background: rgba(0,0,0,0.65);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-card {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 24px 20px;
+            max-width: 460px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3);
+            border: 1px solid var(--border);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-emoji {
+            font-size: 3.5rem;
+            margin-bottom: 12px;
+            line-height: 1;
+        }
+
+        .modal-title {
+            font-size: 1.35rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            color: var(--text-main);
+            line-height: 1.25;
+        }
+
+        .modal-msg {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .modal-btn-primary {
+            width: 100%;
+            min-height: 50px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            margin-bottom: 8px;
+        }
+
+        .modal-btn-secondary {
+            width: 100%;
+            min-height: 44px;
+            background: var(--surface-alt);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -654,92 +1017,145 @@
     <!-- Header Fixo -->
     <header>
         <div class="brand">
-            <div class="brand-badge">CQ</div>
+            <div class="brand-badge">BQ</div>
             <div class="brand-text">
-                <h1>Camily • Bento Quirino</h1>
+                <h1 id="headerTitle">Camily • Bento Quirino</h1>
                 <p>1.000 Questões & 1.000 Bizus Ilustrados</p>
             </div>
         </div>
         <div class="header-actions">
+            <button type="button" class="btn-cloud" onclick="openSyncModal()" title="Salvar online ou sincronizar">
+                ☁️ Salvar Online
+            </button>
             <button class="btn-icon" id="themeBtn" title="Alternar tema">🌙</button>
         </div>
     </header>
 
     <div class="container">
 
-        <!-- Banner de Orientação para Celular -->
-        <div class="mobile-tip-banner">
-            <span style="font-size: 1.5rem;">📱</span>
+        <!-- Banner com Nome do Estudante e Botão de Troca -->
+        <div class="name-banner">
             <div>
-                <strong>Instruções para Camily estudar no celular:</strong> Se você abriu este arquivo pelo preview do Google Drive, toque no ícone de <strong>Download (⬇️)</strong> e abra o arquivo com o aplicativo <strong>Google Chrome</strong> ou <strong>Safari</strong> do seu celular. Assim, todas as 1.000 questões e ilustrações funcionam com toque imediato e 100% offline!
+                👋 Estudando como: <span class="name-highlight" id="displayStudentName">Camily</span>
             </div>
+            <button type="button" class="btn-name-switch" onclick="openNameModal()">
+                Não é a Camily? Insira seu nome e estude com ela!
+            </button>
         </div>
 
         <!-- ABA 1: DASHBOARD -->
         <div id="panel-dash" class="tab-panel active">
             <div class="hero-box">
                 <span class="hero-tag">PLANO DE APROVAÇÃO 2026/2027</span>
-                <h2 class="hero-title">Camily Rumo à Vaga no Bento Quirino! 🚀</h2>
-                <p class="hero-sub">Seu simulador completo e visual de estudos para o 9º ano. Resolva questões comentadas com diagramas explicativos e domine os macetes de prova.</p>
+                <h2 class="hero-title" id="heroTitle">Camily Rumo à Vaga no Bento Quirino! 🚀</h2>
+                <p class="hero-sub">Seu simulador completo de estudos. Acompanhe seus acertos, analise cada erro com desenhos explicativos e domine os macetes do 9º ano!</p>
                 <div class="hero-metrics-row">
                     <div>
                         <div class="hero-m-val" id="topDone">0</div>
                         <div class="hero-m-lbl">Respondidas</div>
                     </div>
                     <div>
-                        <div class="hero-m-val" id="topAccuracy">0%</div>
+                        <div class="hero-m-val" id="topCorrect" style="color:#6ee7b7;">0</div>
                         <div class="hero-m-lbl">Acertos</div>
                     </div>
                     <div>
-                        <div class="hero-m-val" id="topSaved">0</div>
-                        <div class="hero-m-lbl">Favoritas</div>
+                        <div class="hero-m-val" id="topWrong" style="color:#fca5a5;">0</div>
+                        <div class="hero-m-lbl">Erros</div>
+                    </div>
+                    <div>
+                        <div class="hero-m-val" id="topAccuracy">0%</div>
+                        <div class="hero-m-lbl">Taxa</div>
                     </div>
                 </div>
             </div>
 
+            <!-- CARD DE META DIÁRIA & CONTADOR DE PONTUAÇÃO -->
+            <div class="goal-card" id="dailyGoalCard">
+                <div class="goal-header">
+                    <div class="goal-title-wrap">
+                        <span style="font-size:1.4rem;">🎯</span>
+                        <div class="goal-title">Meta de Hoje: <span id="goalTargetDisplay">20</span> questões</div>
+                    </div>
+                    <div class="points-badge" id="pointsBadge">
+                        🏆 <span id="dailyScoreDisplay">0</span> pts hoje
+                    </div>
+                </div>
+
+                <!-- Seletor de Meta Rápida -->
+                <div style="font-size:0.75rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">
+                    ESCOLHA SUA META DIÁRIA:
+                </div>
+                <div class="goal-picker-row" id="goalPickerBar">
+                    <button type="button" class="goal-pill" onclick="setDailyGoal(10)">10 questões</button>
+                    <button type="button" class="goal-pill" onclick="setDailyGoal(15)">15 questões</button>
+                    <button type="button" class="goal-pill active" onclick="setDailyGoal(20)">20 questões</button>
+                    <button type="button" class="goal-pill" onclick="setDailyGoal(30)">30 questões</button>
+                    <button type="button" class="goal-pill" onclick="setDailyGoal(50)">50 questões</button>
+                    <button type="button" class="goal-pill" onclick="openCustomGoalModal()">✏️ Personalizada</button>
+                </div>
+
+                <!-- Barra de Progresso da Meta -->
+                <div class="goal-progress-wrap">
+                    <div class="goal-progress-labels">
+                        <span id="goalCountTxt">0 de 20 concluídas hoje</span>
+                        <span id="goalPercentTxt" style="color:var(--primary);">0%</span>
+                    </div>
+                    <div class="goal-progress-track">
+                        <div class="goal-progress-bar" id="goalProgressBar" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <!-- Mensagem Motivacional de Meta -->
+                <div class="goal-msg" id="goalMessage">
+                    Vamos começar os estudos de hoje? Responda questões para pontuar e bater sua meta diária!
+                </div>
+            </div>
+
+            <!-- Cards de Acesso Rápido -->
             <div class="stats-grid">
-                <div class="stat-card">
+                <div class="stat-card" onclick="openFilteredQuestions('Todas')">
                     <div class="stat-icon" style="background: #eff6ff; color: #1d4ed8;">📚</div>
                     <div>
                         <div class="stat-val" id="sTotalDone">0 / 1000</div>
                         <div class="stat-lbl">Respondidas</div>
                     </div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" onclick="openFilteredQuestions('Acertos')">
                     <div class="stat-icon" style="background: #ecfdf5; color: #059669;">✅</div>
                     <div>
                         <div class="stat-val" id="sCorrect">0</div>
-                        <div class="stat-lbl">Acertos</div>
+                        <div class="stat-lbl">Ver Acertos</div>
                     </div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" onclick="openFilteredQuestions('Erradas')">
                     <div class="stat-icon" style="background: #fef2f2; color: #dc2626;">❌</div>
                     <div>
                         <div class="stat-val" id="sWrong">0</div>
-                        <div class="stat-lbl">Erros</div>
+                        <div class="stat-lbl">Analisar Erros</div>
                     </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-icon" style="background: #fffbeb; color: #d97706;">⭐</div>
+                <div class="stat-card" onclick="showTab('historico')">
+                    <div class="stat-icon" style="background: #fdf4ff; color: #a21caf;">📅</div>
                     <div>
-                        <div class="stat-val" id="sFavs">0</div>
-                        <div class="stat-lbl">Salvas</div>
+                        <div class="stat-val" id="sTodayCount">0</div>
+                        <div class="stat-lbl">Feitas Hoje</div>
                     </div>
                 </div>
             </div>
 
+            <!-- Botões Grandes de Ação -->
             <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
                 <button type="button" onclick="showTab('questoes')" style="width: 100%; min-height: 54px; background: var(--primary); color: white; border: none; border-radius: var(--radius-md); font-weight: 800; font-size: 1.05rem; cursor: pointer; box-shadow: 0 4px 10px rgba(29,78,216,0.3);">
-                    📝 Praticar 1.000 Questões com Desenhos
+                    📝 Praticar 1.000 Questões
+                </button>
+                <button type="button" onclick="showTab('historico')" style="width: 100%; min-height: 54px; background: var(--surface); color: var(--text-main); border: 1.5px solid var(--border); border-radius: var(--radius-md); font-weight: 800; font-size: 1.02rem; cursor: pointer;">
+                    📅 Ver Histórico de Respostas por Dia
+                </button>
+                <button type="button" onclick="openFilteredQuestions('Erradas')" style="width: 100%; min-height: 54px; background: #fee2e2; color: #991b1b; border: 1.5px solid #fecaca; border-radius: var(--radius-md); font-weight: 800; font-size: 1.02rem; cursor: pointer;">
+                    🔍 Revisar Questões Erradas (Aprender com os Erros)
                 </button>
                 <button type="button" onclick="showTab('cards')" style="width: 100%; min-height: 54px; background: var(--surface); color: var(--text-main); border: 1.5px solid var(--border); border-radius: var(--radius-md); font-weight: 800; font-size: 1.05rem; cursor: pointer;">
                     💡 Estudar 1.000 Cards Ilustrados
-                </button>
-            </div>
-
-            <div style="text-align: center; margin-bottom: 20px;">
-                <button type="button" onclick="resetProgress()" style="background: none; border: 1px solid var(--danger); color: var(--danger); padding: 8px 16px; border-radius: var(--radius-sm); font-weight: 700; font-size: 0.82rem; cursor: pointer;">
-                    🔄 Zerar Histórico de Respostas
                 </button>
             </div>
         </div>
@@ -750,11 +1166,13 @@
                 <input type="text" id="qSearchInput" class="search-input" placeholder="🔍 Buscar por palavra-chave ou nº da questão..." oninput="handleSearch()">
                 <div class="pills-bar" id="matFilters">
                     <button type="button" class="pill-btn active" onclick="setFilter('Todas')">Todas (1000)</button>
+                    <button type="button" class="pill-btn pill-erradas" onclick="setFilter('Erradas')">❌ Erradas <span class="pill-badge" id="badgeErradas">0</span></button>
+                    <button type="button" class="pill-btn pill-acertos" onclick="setFilter('Acertos')">✅ Acertos <span class="pill-badge" id="badgeAcertos">0</span></button>
+                    <button type="button" class="pill-btn" onclick="setFilter('Favoritas')">⭐ Favoritas <span class="pill-badge" id="badgeFavs">0</span></button>
                     <button type="button" class="pill-btn" onclick="setFilter('Português')">Português (250)</button>
                     <button type="button" class="pill-btn" onclick="setFilter('Matemática')">Matemática (250)</button>
                     <button type="button" class="pill-btn" onclick="setFilter('Ciências da Natureza')">Ciências (250)</button>
                     <button type="button" class="pill-btn" onclick="setFilter('História e Geografia')">Humanas (250)</button>
-                    <button type="button" class="pill-btn" onclick="setFilter('Favoritas')">⭐ Favoritas</button>
                 </div>
             </div>
 
@@ -790,6 +1208,166 @@
             </div>
         </div>
 
+        <!-- ABA 4: HISTÓRICO DE RESPOSTAS POR DIA -->
+        <div id="panel-historico" class="tab-panel">
+            <div class="history-controls">
+                <label for="historyDateSelect" style="display:block; font-size:0.85rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">
+                    📅 SELECIONE O DIA DE ESTUDO:
+                </label>
+                <select id="historyDateSelect" class="date-select" onchange="changeHistoryDate()"></select>
+
+                <!-- Resumo do Dia -->
+                <div class="hero-metrics-row" style="margin-bottom:12px;">
+                    <div>
+                        <div class="hero-m-val" id="dayDone">0</div>
+                        <div class="hero-m-lbl">Total no Dia</div>
+                    </div>
+                    <div>
+                        <div class="hero-m-val" id="dayCorrect" style="color:#6ee7b7;">0</div>
+                        <div class="hero-m-lbl">Acertos</div>
+                    </div>
+                    <div>
+                        <div class="hero-m-val" id="dayWrong" style="color:#fca5a5;">0</div>
+                        <div class="hero-m-lbl">Erros</div>
+                    </div>
+                    <div>
+                        <div class="hero-m-val" id="dayAcc">0%</div>
+                        <div class="hero-m-lbl">Aproveitamento</div>
+                    </div>
+                </div>
+
+                <!-- Filtros do Dia -->
+                <div class="pills-bar" id="dayFilterPills">
+                    <button type="button" class="pill-btn active" onclick="setDayFilter('todas')">Todas do Dia</button>
+                    <button type="button" class="pill-btn pill-acertos" onclick="setDayFilter('certas')">✅ Acertos do Dia</button>
+                    <button type="button" class="pill-btn pill-erradas" onclick="setDayFilter('erradas')">❌ Erradas do Dia</button>
+                </div>
+
+                <!-- Painel de Limpeza de Respostas -->
+                <div class="clean-actions-box">
+                    <strong style="font-size:0.9rem; color:var(--text-main); display:block; margin-bottom:8px;">⚙️ Gerenciar / Limpar Respostas:</strong>
+                    
+                    <button type="button" onclick="cleanSelectedDayAnswers()" style="width:100%; padding:10px; background:none; border:1px solid var(--danger); color:var(--danger); border-radius:var(--radius-sm); font-weight:700; font-size:0.85rem; cursor:pointer; margin-bottom:12px;">
+                        🗑️ Limpar Apenas as Respostas Deste Dia
+                    </button>
+
+                    <div style="border-top: 1px dashed var(--border); padding-top:10px;">
+                        <span style="font-size:0.82rem; font-weight:700; color:var(--text-muted);">✂️ Deseja apagar as últimas respostas?</span>
+                        <div class="slider-box">
+                            <input type="range" id="cleanLastSlider" class="range-slider" min="1" max="50" value="5" oninput="updateSliderLabel()">
+                            <span id="sliderValDisplay" style="font-weight:800; font-size:0.95rem; color:var(--primary); min-width:30px;">5</span>
+                        </div>
+                        <button type="button" onclick="cleanLastNAnswers()" style="width:100%; padding:10px; background:var(--surface); border:1px solid var(--border); color:var(--text-main); border-radius:var(--radius-sm); font-weight:700; font-size:0.85rem; cursor:pointer;">
+                            Apagar as últimas <span id="sliderBtnVal">5</span> respostas respondidas
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lista de Questões do Dia Selecionado -->
+            <div id="dayQuestionsList"></div>
+        </div>
+
+    </div>
+
+    <!-- MODAL: PERSONALIZAR META DIÁRIA -->
+    <div class="modal-overlay" id="modalCustomGoal">
+        <div class="modal-card">
+            <div class="modal-emoji">🎯📝</div>
+            <h3 class="modal-title">Definir Meta Personalizada</h3>
+            <p class="modal-msg">Quantas questões você deseja responder por dia como objetivo de estudo?</p>
+            <input type="number" id="customGoalInput" class="search-input" style="font-size:1.3rem; text-align:center;" min="5" max="200" value="25">
+            <button type="button" class="modal-btn-primary" onclick="saveCustomGoal()">
+                Salvar Meta Diária
+            </button>
+            <button type="button" class="modal-btn-secondary" onclick="closeCustomGoalModal()">
+                Cancelar
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL: NÃO É A CAMILY? TROCAR NOME -->
+    <div class="modal-overlay" id="modalName">
+        <div class="modal-card">
+            <div class="modal-emoji">👋✏️</div>
+            <h3 class="modal-title">Quem está estudando agora?</h3>
+            <p class="modal-msg">Insira seu nome para personalizar as metas, celebrações e o histórico com o seu perfil!</p>
+            <input type="text" id="userNameInput" class="search-input" style="font-size:1.1rem; text-align:center;" placeholder="Seu nome aqui...">
+            <button type="button" class="modal-btn-primary" onclick="saveNewUserName()">
+                Salvar Meu Nome
+            </button>
+            <button type="button" class="modal-btn-secondary" onclick="closeNameModal()">
+                Cancelar
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL: SALVAR ONLINE / SINCRONIZAR EM QUALQUER APARELHO -->
+    <div class="modal-overlay" id="modalSync">
+        <div class="modal-card" style="text-align:left;">
+            <div style="text-align:center;">
+                <div class="modal-emoji">☁️📱</div>
+                <h3 class="modal-title">Salvar e Continuar em Qualquer Aparelho</h3>
+                <p class="modal-msg">Transfira suas respostas entre celular, computador ou tablet em segundos:</p>
+            </div>
+
+            <!-- Opção 1: Link Mágico -->
+            <div style="background:var(--surface-alt); padding:14px; border-radius:var(--radius-md); margin-bottom:12px; border:1px solid var(--border);">
+                <strong style="color:var(--primary); font-size:0.95rem; display:block; margin-bottom:4px;">1. 🔗 Link de Sincronização Automática:</strong>
+                <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:8px;">Basta copiar este link e abrir em qualquer outro celular ou computador:</p>
+                <button type="button" class="modal-btn-primary" onclick="copySyncLink()" style="margin-bottom:0;">
+                    📋 Copiar Meu Link de Progresso
+                </button>
+            </div>
+
+            <!-- Opção 2: Código de Texto -->
+            <div style="background:var(--surface-alt); padding:14px; border-radius:var(--radius-md); margin-bottom:12px; border:1px solid var(--border);">
+                <strong style="color:var(--primary); font-size:0.95rem; display:block; margin-bottom:4px;">2. 📋 Código de Backup (Texto):</strong>
+                <button type="button" onclick="copyProgressCode()" style="width:100%; padding:10px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); font-weight:700; font-size:0.82rem; cursor:pointer; margin-bottom:8px;">
+                    Copiar Código de Progresso
+                </button>
+                <textarea id="importCodeInput" placeholder="Ou cole o código de progresso aqui para restaurar..." style="width:100%; height:55px; border-radius:var(--radius-sm); border:1px solid var(--border); font-size:0.8rem; padding:6px; outline:none;"></textarea>
+                <button type="button" onclick="restoreProgressFromCode()" style="width:100%; padding:10px; background:var(--success); color:white; border:none; border-radius:var(--radius-sm); font-weight:800; font-size:0.85rem; cursor:pointer; margin-top:6px;">
+                    Restaurar do Código Colado
+                </button>
+            </div>
+
+            <button type="button" class="modal-btn-secondary" onclick="closeSyncModal()">
+                Fechar
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL DE CELEBRAÇÃO (A CADA 10 ACERTOS) -->
+    <div class="modal-overlay" id="modalCelebration">
+        <div class="modal-card">
+            <div class="modal-emoji">🎉✨</div>
+            <h3 class="modal-title" id="celebrationTitle">Parabéns Filha, você acertou 10 questões!</h3>
+            <p class="modal-msg" id="celebrationMsg">
+                Que orgulho! Você acaba de alcançar mais um marco incrível de acertos. Cada questão certa é um passo mais próximo da sua vaga no Bento Quirino!
+            </p>
+            <button type="button" class="modal-btn-primary" onclick="closeCelebrationModal()">
+                🚀 Continuar com Tudo!
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL DE AVISO (5 ERROS SEGUIDOS) -->
+    <div class="modal-overlay" id="modalErrorStreak">
+        <div class="modal-card">
+            <div class="modal-emoji">🧘‍♀️💡</div>
+            <h3 class="modal-title" id="errorModalTitle" style="color:#dc2626;">Calma, Filha! Vamos respirar fundo?</h3>
+            <p class="modal-msg" id="errorModalMsg">
+                Você errou <strong>5 questões seguidas</strong>. Isso é absolutamente normal e faz parte do aprendizado!<br><br>
+                O segredo de quem passa nas primeiras colocações é <strong>parar um instante para analisar com calma onde errou</strong>, reler a explicação e ver os bizus antes de seguir em frente. Você é capaz!
+            </p>
+            <button type="button" class="modal-btn-primary" style="background:#dc2626;" onclick="goToWrongQuestionsFromModal()">
+                🔍 Analisar Onde Errei (Ver Questões Erradas)
+            </button>
+            <button type="button" class="modal-btn-secondary" onclick="closeErrorStreakModal()" style="margin-top:6px;">
+                Continuar Treinando
+            </button>
+        </div>
     </div>
 
     <!-- Navegação Inferior Mobile -->
@@ -801,6 +1379,10 @@
         <button type="button" class="nav-touch-item" onclick="showTab('questoes')">
             <span class="nav-icon">📝</span>
             <span class="nav-txt">1000 Questões</span>
+        </button>
+        <button type="button" class="nav-touch-item" onclick="showTab('historico')">
+            <span class="nav-icon">📅</span>
+            <span class="nav-txt">Histórico</span>
         </button>
         <button type="button" class="nav-touch-item" onclick="showTab('cards')">
             <span class="nav-icon">💡</span>
@@ -845,11 +1427,9 @@
                 <polygon points="120,50 110,85 130,85" fill="#64748b"/>
                 <line x1="40" y1="50" x2="200" y2="50" stroke="#1d4ed8" stroke-width="3"/>
                 <circle cx="120" cy="50" r="4" fill="#1d4ed8"/>
-                <!-- Prato Esquerdo -->
                 <line x1="60" y1="50" x2="60" y2="70" stroke="#94a3b8" stroke-width="1.5"/>
                 <rect x="35" y="70" width="50" height="20" rx="4" fill="#eff6ff" stroke="#3b82f6"/>
                 <text x="60" y="84" fill="#1e40af" font-size="10" font-weight="bold" text-anchor="middle">ax + b</text>
-                <!-- Prato Direito -->
                 <line x1="180" y1="50" x2="180" y2="70" stroke="#94a3b8" stroke-width="1.5"/>
                 <rect x="155" y="70" width="50" height="20" rx="4" fill="#eff6ff" stroke="#3b82f6"/>
                 <text x="180" y="84" fill="#1e40af" font-size="10" font-weight="bold" text-anchor="middle">c</text>
@@ -900,37 +1480,30 @@
                 <text x="207" y="55" fill="#065f46" font-size="11" font-weight="bold" text-anchor="middle">kWh</text>
             </svg>`,
             filtracao: `<svg viewBox="0 0 240 120" style="max-width:260px;width:100%;height:auto;display:block;margin:6px auto;">
-                <!-- Funil -->
                 <polygon points="70,20 170,20 125,75 125,95 115,95 115,75" fill="#f1f5f9" stroke="#475569" stroke-width="2"/>
-                <!-- Papel de filtro -->
                 <polygon points="80,24 160,24 120,68" fill="#fee2e2" stroke="#ef4444" stroke-width="1.5"/>
                 <text x="180" y="36" fill="#b91c1c" font-size="9.5" font-weight="bold">Sólido retido</text>
-                <!-- Líquido filtrado -->
                 <circle cx="120" cy="105" r="2.5" fill="#3b82f6"/>
                 <circle cx="120" cy="114" r="2" fill="#3b82f6"/>
                 <text x="60" y="110" fill="#1e40af" font-size="9.5" font-weight="bold">Líquido passa</text>
             </svg>`,
             cadeia_trofica: `<svg viewBox="0 0 240 120" style="max-width:260px;width:100%;height:auto;display:block;margin:6px auto;">
-                <!-- Pirâmide -->
                 <polygon points="120,15 200,95 40,95" fill="none" stroke="#059669" stroke-width="2"/>
                 <line x1="60" y1="75" x2="180" y2="75" stroke="#059669" stroke-width="1.5"/>
                 <line x1="85" y1="50" x2="155" y2="50" stroke="#059669" stroke-width="1.5"/>
                 <text x="120" y="90" fill="#065f46" font-size="9" font-weight="bold" text-anchor="middle">Produtores (Mais Energia)</text>
                 <text x="120" y="66" fill="#065f46" font-size="9" font-weight="bold" text-anchor="middle">Herbívoros (Consumidores 1º)</text>
                 <text x="120" y="42" fill="#065f46" font-size="9" font-weight="bold" text-anchor="middle">Carnívoros (Topo)</text>
-                <!-- Seta Bioacumulação -->
                 <line x1="215" y1="95" x2="215" y2="25" stroke="#dc2626" stroke-width="2"/>
                 <polygon points="211,28 215,18 219,28" fill="#dc2626"/>
                 <text x="215" y="110" fill="#991b1b" font-size="8.5" font-weight="bold" text-anchor="middle">Toxinas ↑</text>
             </svg>`,
             vacina_soro: `<svg viewBox="0 0 240 110" style="max-width:260px;width:100%;height:auto;display:block;margin:6px auto;">
-                <!-- Card Vacina -->
                 <rect x="20" y="15" width="95" height="80" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="1.8"/>
                 <text x="67" y="34" fill="#065f46" font-size="11" font-weight="bold" text-anchor="middle">💉 VACINA</text>
                 <text x="67" y="52" fill="#047857" font-size="9.5" text-anchor="middle">• Preventiva</text>
                 <text x="67" y="66" fill="#047857" font-size="9.5" text-anchor="middle">• Tem Antígenos</text>
                 <text x="67" y="80" fill="#047857" font-size="9.5" text-anchor="middle">• Gera Memória</text>
-                <!-- Card Soro -->
                 <rect x="125" y="15" width="95" height="80" rx="8" fill="#fef2f2" stroke="#ef4444" stroke-width="1.8"/>
                 <text x="172" y="34" fill="#991b1b" font-size="11" font-weight="bold" text-anchor="middle">🧪 SORO</text>
                 <text x="172" y="52" fill="#b91c1c" font-size="9.5" text-anchor="middle">• Curativo</text>
@@ -994,10 +1567,8 @@
             </svg>`,
             ilha_calor: `<svg viewBox="0 0 240 100" style="max-width:260px;width:100%;height:auto;display:block;margin:6px auto;">
                 <path d="M 30,70 Q 70,70 90,40 Q 120,20 150,40 Q 170,70 210,70" fill="none" stroke="#ef4444" stroke-width="2.5"/>
-                <!-- Prédios no centro -->
                 <rect x="105" y="45" width="12" height="35" fill="#94a3b8"/>
                 <rect x="120" y="35" width="15" height="45" fill="#64748b"/>
-                <!-- Árvores nas pontas -->
                 <circle cx="50" cy="65" r="8" fill="#10b981"/>
                 <circle cx="190" cy="65" r="8" fill="#10b981"/>
                 <text x="120" y="16" fill="#dc2626" font-size="9.5" font-weight="bold" text-anchor="middle">Pico Térmico no Centro Urbano</text>
@@ -1011,15 +1582,6 @@
                 <text x="120" y="55" fill="#991b1b" font-size="9.5" font-weight="bold" text-anchor="middle">Camada de Ar Quente (Bloqueio)</text>
                 <rect x="25" y="65" width="190" height="22" rx="4" fill="#f1f5f9" stroke="#94a3b8"/>
                 <text x="120" y="80" fill="#334155" font-size="9.5" font-weight="bold" text-anchor="middle">Ar Frio + Poluição Presa no Solo</text>
-            </svg>`,
-            relogio_prova: `<svg viewBox="0 0 240 100" style="max-width:260px;width:100%;height:auto;display:block;margin:6px auto;">
-                <circle cx="60" cy="50" r="35" fill="#f8fafc" stroke="#1d4ed8" stroke-width="2.5"/>
-                <line x1="60" y1="50" x2="60" y2="25" stroke="#1d4ed8" stroke-width="2"/>
-                <line x1="60" y1="50" x2="80" y2="50" stroke="#ef4444" stroke-width="2"/>
-                <text x="155" y="35" fill="#1e40af" font-size="11" font-weight="bold" text-anchor="middle">⏱️ 3 Minutos/Questão</text>
-                <text x="155" y="55" fill="#475569" font-size="9.5" text-anchor="middle">1ª Rodada: Rápidas e Fáceis</text>
-                <text x="155" y="70" fill="#475569" font-size="9.5" text-anchor="middle">2ª Rodada: Contas e Cálculos</text>
-                <text x="155" y="85" fill="#475569" font-size="9.5" text-anchor="middle">3ª Rodada: Longas e Revisão</text>
             </svg>`
         };
 
@@ -1027,25 +1589,156 @@
             return SVG_LIB[type] || SVG_LIB['pitagoras'];
         }
 
+        // ESTADO GLOBAL COM META DIÁRIA
         let state = {
+            userName: "Camily",
+            dailyGoal: 20,
             answers: {},
-            favs: {}
+            favs: {},
+            consecutiveErrors: 0,
+            celebratedMilestones: []
         };
+
+        function getAnsObj(qId) {
+            const a = state.answers[qId];
+            if (!a) return null;
+            if (typeof a === 'number') {
+                const q = DB_QUESTIONS.find(item => item.id == qId);
+                return {
+                    choice: a,
+                    isCorrect: q ? (a === q.correta) : false,
+                    timestamp: Date.now(),
+                    dateStr: new Date().toLocaleDateString('pt-BR')
+                };
+            }
+            return a;
+        }
 
         function loadStorage() {
             try {
-                const s = localStorage.getItem('bq_camily_db');
+                const s = localStorage.getItem('bq_camily_v4');
                 if (s) state = JSON.parse(s);
             } catch(e) {}
+            
+            if (!state.dailyGoal) state.dailyGoal = 20;
+            checkUrlSync();
         }
 
         function saveStorage() {
             try {
-                localStorage.setItem('bq_camily_db', JSON.stringify(state));
+                localStorage.setItem('bq_camily_v4', JSON.stringify(state));
             } catch(e) {}
             updateStatsUI();
+            updateNameUI();
+            updateDailyGoalUI();
         }
 
+        function updateNameUI() {
+            const name = state.userName || "Camily";
+            document.getElementById('displayStudentName').innerText = name;
+            document.getElementById('headerTitle').innerText = `${name} • Bento Quirino`;
+            document.getElementById('heroTitle').innerText = `${name} Rumo à Vaga no Bento Quirino! 🚀`;
+        }
+
+        /* Modal Trocar Nome */
+        function openNameModal() {
+            document.getElementById('userNameInput').value = state.userName || "Camily";
+            document.getElementById('modalName').classList.add('active');
+        }
+
+        function closeNameModal() {
+            document.getElementById('modalName').classList.remove('active');
+        }
+
+        function saveNewUserName() {
+            const val = document.getElementById('userNameInput').value.trim();
+            if (val) {
+                state.userName = val;
+                saveStorage();
+            }
+            closeNameModal();
+        }
+
+        /* ==========================================
+           SISTEMA DE META DIÁRIA E PONTUAÇÃO (HOME)
+           ========================================== */
+        function setDailyGoal(goalNum) {
+            state.dailyGoal = goalNum;
+            saveStorage();
+            updateDailyGoalUI();
+        }
+
+        function openCustomGoalModal() {
+            document.getElementById('customGoalInput').value = state.dailyGoal || 20;
+            document.getElementById('modalCustomGoal').classList.add('active');
+        }
+
+        function closeCustomGoalModal() {
+            document.getElementById('modalCustomGoal').classList.remove('active');
+        }
+
+        function saveCustomGoal() {
+            const val = parseInt(document.getElementById('customGoalInput').value);
+            if (val && val > 0) {
+                setDailyGoal(val);
+            }
+            closeCustomGoalModal();
+        }
+
+        function updateDailyGoalUI() {
+            const goal = state.dailyGoal || 20;
+            const todayStr = new Date().toLocaleDateString('pt-BR');
+            let todayCount = 0;
+            let todayCorrect = 0;
+
+            Object.keys(state.answers).forEach(id => {
+                const a = getAnsObj(id);
+                if (a && a.dateStr === todayStr) {
+                    todayCount++;
+                    if (a.isCorrect) todayCorrect++;
+                }
+            });
+
+            const todayWrong = todayCount - todayCorrect;
+            // Pontuação: 10 pontos por acerto + 2 pontos por tentativa respondida
+            const todayScore = (todayCorrect * 10) + (todayWrong * 2);
+
+            // Atualiza o display da meta
+            document.getElementById('goalTargetDisplay').innerText = goal;
+            document.getElementById('dailyScoreDisplay').innerText = todayScore;
+            document.getElementById('goalCountTxt').innerText = `${todayCount} de ${goal} questões concluídas hoje (${todayCorrect} acertos)`;
+
+            const pct = Math.min(100, Math.round((todayCount / goal) * 100));
+            document.getElementById('goalPercentTxt').innerText = pct + '%';
+            document.getElementById('goalProgressBar').style.width = pct + '%';
+
+            // Atualiza status das pills da meta
+            document.querySelectorAll('#goalPickerBar .goal-pill').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.innerText.startsWith(goal + ' ')) {
+                    btn.classList.add('active');
+                }
+            });
+
+            const card = document.getElementById('dailyGoalCard');
+            const msgEl = document.getElementById('goalMessage');
+            const name = state.userName || "Camily";
+
+            if (todayCount >= goal) {
+                card.classList.add('completed');
+                msgEl.innerHTML = `🎉 <strong>META DO DIA BATIDA! Parabéns, ${name}!</strong> Você concluiu ${todayCount} questões hoje e acumulou <strong>${todayScore} pontos</strong>! Continue assim para garantir sua aprovação no Bento Quirino! 🌟`;
+            } else {
+                card.classList.remove('completed');
+                const remaining = goal - todayCount;
+                if (todayCount === 0) {
+                    msgEl.innerText = `Vamos começar os estudos de hoje? Faltam ${goal} questões para bater sua meta diária e pontuar!`;
+                } else {
+                    msgEl.innerText = `Foco, ${name}! Você já fez ${todayCount} questões (+${todayScore} pts). Faltam apenas ${remaining} questões para bater sua meta de hoje! 🚀`;
+                }
+            }
+        }
+
+        /* Navegação entre Abas */
         function showTab(id) {
             document.querySelectorAll('.tab-panel').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-touch-item').forEach(el => el.classList.remove('active'));
@@ -1056,9 +1749,19 @@
             const navs = document.querySelectorAll('.nav-touch-item');
             if (id === 'dash') navs[0].classList.add('active');
             if (id === 'questoes') navs[1].classList.add('active');
-            if (id === 'cards') navs[2].classList.add('active');
+            if (id === 'historico') {
+                navs[2].classList.add('active');
+                populateHistoryDates();
+                renderDailyHistory();
+            }
+            if (id === 'cards') navs[3].classList.add('active');
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function openFilteredQuestions(filterType) {
+            showTab('questoes');
+            setFilter(filterType);
         }
 
         /* Questões */
@@ -1069,8 +1772,15 @@
 
         function getFilteredQuestions() {
             return DB_QUESTIONS.filter(q => {
+                const a = getAnsObj(q.id);
+                const isAns = !!a;
+                const isRight = isAns && a.isCorrect;
+
                 if (qFilter === 'Favoritas' && !state.favs[q.id]) return false;
-                if (qFilter !== 'Todas' && qFilter !== 'Favoritas' && q.materia !== qFilter) return false;
+                if (qFilter === 'Erradas' && (!isAns || isRight)) return false;
+                if (qFilter === 'Acertos' && (!isAns || !isRight)) return false;
+                if (qFilter !== 'Todas' && qFilter !== 'Favoritas' && qFilter !== 'Erradas' && qFilter !== 'Acertos' && q.materia !== qFilter) return false;
+                
                 if (qSearch) {
                     const s = qSearch.toLowerCase();
                     const matchText = (q.enunciado + ' ' + q.tema + ' ' + q.id).toLowerCase();
@@ -1087,7 +1797,11 @@
             if (qPage > totalPages) qPage = totalPages;
             if (qPage < 1) qPage = 1;
 
-            document.getElementById('pageQIndicator').innerText = `Página ${qPage} de ${totalPages} (${filtered.length} no filtro)`;
+            let filterLabel = qFilter;
+            if (qFilter === 'Erradas') filterLabel = '❌ Questões Erradas';
+            if (qFilter === 'Acertos') filterLabel = '✅ Questões Acertadas';
+
+            document.getElementById('pageQIndicator').innerText = `Página ${qPage} de ${totalPages} (${filtered.length} em ${filterLabel})`;
             document.getElementById('btnPrevQ').disabled = (qPage <= 1);
             document.getElementById('btnNextQ').disabled = (qPage >= totalPages);
 
@@ -1095,15 +1809,19 @@
             const currentSlice = filtered.slice(start, start + Q_PER_PAGE);
 
             if (currentSlice.length === 0) {
-                list.innerHTML = `<div style="text-align:center; padding: 40px; color: var(--text-muted); font-weight: 700;">Nenhuma questão encontrada para este filtro.</div>`;
+                let emptyMsg = "Nenhuma questão encontrada para este filtro.";
+                if (qFilter === 'Erradas') emptyMsg = "🎉 Parabéns! Você não tem questões erradas registradas neste momento.";
+                if (qFilter === 'Acertos') emptyMsg = "Você ainda não acertou questões neste filtro. Comece a responder para ver seus acertos aqui!";
+                list.innerHTML = `<div style="text-align:center; padding: 40px 20px; color: var(--text-muted); font-weight: 700; line-height: 1.5;">${emptyMsg}</div>`;
                 return;
             }
 
             let html = '';
             currentSlice.forEach(q => {
-                const isAns = state.answers.hasOwnProperty(q.id);
-                const userChoice = state.answers[q.id];
-                const isRight = isAns && (userChoice === q.correta);
+                const a = getAnsObj(q.id);
+                const isAns = !!a;
+                const userChoice = isAns ? a.choice : -1;
+                const isRight = isAns && a.isCorrect;
                 const isFav = !!state.favs[q.id];
 
                 let cardClass = 'q-item';
@@ -1130,25 +1848,60 @@
 
                 let fbHtml = '';
                 if (isAns) {
-                    const title = isRight ? '🎉 Parabéns, Camily! Resposta Certa!' : '❌ Ops! Resposta Incorreta!';
+                    const chosenLetter = String.fromCharCode(65 + userChoice);
+                    const chosenText = q.opcoes[userChoice] ? q.opcoes[userChoice].replace(/^[A-E]\)\s*/, '') : '';
+                    const correctLetter = String.fromCharCode(65 + q.correta);
+                    const correctText = q.opcoes[q.correta].replace(/^[A-E]\)\s*/, '');
                     const svgMarkup = getSvgIllustration(q.svg_type);
-                    fbHtml = `
-                        <div class="fb-box ${isRight ? 'correct' : 'wrong'}">
-                            <strong>${title} (Gabarito: Letra ${String.fromCharCode(65 + q.correta)})</strong>
-                            <p style="margin-top: 4px;">${q.comentario}</p>
-                            
-                            <!-- Ilustração Explicativa -->
-                            <div class="illustration-wrap">
-                                <div class="illustration-title">📐 Desenho Explicativo do Conceito</div>
-                                ${svgMarkup}
-                            </div>
 
-                            <div class="bizu-badge">
-                                <span>⚡</span>
-                                <div><strong>Bizu de Prova:</strong> ${q.dica}</div>
+                    if (isRight) {
+                        fbHtml = `
+                            <div class="fb-box correct">
+                                <strong>🎉 Muito bem, ${state.userName}! Resposta Certa! (+10 pts) (Gabarito: Letra ${correctLetter})</strong>
+                                
+                                <div class="correct-explanation-box">
+                                    <strong>✅ Por que a Letra ${correctLetter} está certa:</strong><br>
+                                    ${q.comentario}
+                                </div>
+
+                                <div class="illustration-wrap">
+                                    <div class="illustration-title">📐 Desenho Explicativo do Conceito</div>
+                                    ${svgMarkup}
+                                </div>
+
+                                <div class="bizu-badge">
+                                    <span>⚡</span>
+                                    <div><strong>Bizu de Prova:</strong> ${q.dica}</div>
+                                </div>
                             </div>
-                        </div>
-                    `;
+                        `;
+                    } else {
+                        fbHtml = `
+                            <div class="fb-box wrong">
+                                <strong>❌ Atenção ao Erro na Questão (Gabarito Oficial: Letra ${correctLetter})</strong>
+                                
+                                <div class="err-analysis-box">
+                                    <strong>🔍 O que você marcou:</strong> Letra ${chosenLetter} (<em>"${chosenText}"</em>)<br>
+                                    <strong>⚠️ Por que esta alternativa está INCORRETA:</strong> Esta opção confunde conceitos fundamentais da matéria. Analise a correta abaixo com o desenho explicativo para fixar o aprendizado.
+                                </div>
+
+                                <div class="correct-explanation-box">
+                                    <strong>✅ Alternativa Correta: Letra ${correctLetter} (<em>"${correctText}"</em>)</strong><br>
+                                    <strong>💡 Resolução Passo a Passo:</strong> ${q.comentario}
+                                </div>
+
+                                <div class="illustration-wrap">
+                                    <div class="illustration-title">📐 Desenho Explicativo do Conceito</div>
+                                    ${svgMarkup}
+                                </div>
+
+                                <div class="bizu-badge">
+                                    <span>⚡</span>
+                                    <div><strong>Bizu de Ouro:</strong> ${q.dica}</div>
+                                </div>
+                            </div>
+                        `;
+                    }
                 }
 
                 html += `
@@ -1173,9 +1926,80 @@
         }
 
         function handleAnswer(qId, optIdx) {
-            state.answers[qId] = optIdx;
+            const q = DB_QUESTIONS.find(item => item.id === qId);
+            if (!q) return;
+
+            const isCorrect = (optIdx === q.correta);
+            const todayStr = new Date().toLocaleDateString('pt-BR');
+
+            state.answers[qId] = {
+                choice: optIdx,
+                isCorrect: isCorrect,
+                timestamp: Date.now(),
+                dateStr: todayStr
+            };
+
+            if (isCorrect) {
+                state.consecutiveErrors = 0;
+            } else {
+                state.consecutiveErrors = (state.consecutiveErrors || 0) + 1;
+            }
+
             saveStorage();
             renderQuestions();
+
+            if (!isCorrect && state.consecutiveErrors >= 5) {
+                showErrorStreakModal();
+                return;
+            }
+
+            if (isCorrect) {
+                checkMilestoneCelebration();
+            }
+        }
+
+        function checkMilestoneCelebration() {
+            const ansKeys = Object.keys(state.answers);
+            let totalCorrect = 0;
+            ansKeys.forEach(id => {
+                const a = getAnsObj(id);
+                if (a && a.isCorrect) totalCorrect++;
+            });
+
+            if (totalCorrect > 0 && totalCorrect % 10 === 0) {
+                if (!state.celebratedMilestones) state.celebratedMilestones = [];
+                if (!state.celebratedMilestones.includes(totalCorrect)) {
+                    state.celebratedMilestones.push(totalCorrect);
+                    saveStorage();
+                    showCelebrationModal(totalCorrect);
+                }
+            }
+        }
+
+        function showCelebrationModal(count) {
+            const name = state.userName || "Filha";
+            document.getElementById('celebrationTitle').innerText = `Parabéns ${name}, você acertou ${count} questões!`;
+            document.getElementById('celebrationMsg').innerHTML = `Você acabou de completar mais 10 acertos, totalizando <strong>${count} acertos</strong>! Cada questão resolvida com dedicação coloca você cada vez mais perto da sua vaga no Bento Quirino! Continue com esse foco maravilhoso! 🌟`;
+            document.getElementById('modalCelebration').classList.add('active');
+        }
+
+        function closeCelebrationModal() {
+            document.getElementById('modalCelebration').classList.remove('active');
+        }
+
+        function showErrorStreakModal() {
+            const name = state.userName || "Filha";
+            document.getElementById('errorModalTitle').innerText = `Calma, ${name}! Vamos respirar fundo?`;
+            document.getElementById('modalErrorStreak').classList.add('active');
+        }
+
+        function closeErrorStreakModal() {
+            document.getElementById('modalErrorStreak').classList.remove('active');
+        }
+
+        function goToWrongQuestionsFromModal() {
+            closeErrorStreakModal();
+            openFilteredQuestions('Erradas');
         }
 
         function toggleFav(qId) {
@@ -1215,6 +2039,299 @@
                 qPage++;
                 renderQuestions();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        /* ==========================================
+           HISTÓRICO DIÁRIO E GERENCIAMENTO DE RESPOSTAS
+           ========================================== */
+        let selectedHistoryDate = '';
+        let dayFilter = 'todas';
+
+        function populateHistoryDates() {
+            const select = document.getElementById('historyDateSelect');
+            const datesSet = new Set();
+            const todayStr = new Date().toLocaleDateString('pt-BR');
+            
+            Object.keys(state.answers).forEach(id => {
+                const a = getAnsObj(id);
+                if (a && a.dateStr) datesSet.add(a.dateStr);
+            });
+
+            datesSet.add(todayStr);
+            const sortedDates = Array.from(datesSet).sort((a, b) => {
+                const [d1, m1, y1] = a.split('/');
+                const [d2, m2, y2] = b.split('/');
+                return new Date(y2, m2-1, d2) - new Date(y1, m1-1, d1);
+            });
+
+            select.innerHTML = '';
+            sortedDates.forEach(d => {
+                let count = 0;
+                Object.keys(state.answers).forEach(id => {
+                    const a = getAnsObj(id);
+                    if (a && a.dateStr === d) count++;
+                });
+                const isToday = (d === todayStr);
+                const opt = document.createElement('option');
+                opt.value = d;
+                opt.innerText = `${isToday ? 'Hoje (' + d + ')' : d} • ${count} questões respondidas`;
+                select.appendChild(opt);
+            });
+
+            if (!selectedHistoryDate || !datesSet.has(selectedHistoryDate)) {
+                selectedHistoryDate = sortedDates[0] || todayStr;
+            }
+            select.value = selectedHistoryDate;
+
+            const totalAns = Object.keys(state.answers).length;
+            const slider = document.getElementById('cleanLastSlider');
+            if (slider) {
+                slider.max = Math.max(totalAns, 1);
+                if (parseInt(slider.value) > totalAns) slider.value = Math.min(totalAns, 5);
+                updateSliderLabel();
+            }
+        }
+
+        function changeHistoryDate() {
+            selectedHistoryDate = document.getElementById('historyDateSelect').value;
+            renderDailyHistory();
+        }
+
+        function setDayFilter(type) {
+            dayFilter = type;
+            document.querySelectorAll('#dayFilterPills .pill-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            renderDailyHistory();
+        }
+
+        function renderDailyHistory() {
+            const list = document.getElementById('dayQuestionsList');
+            const date = selectedHistoryDate || new Date().toLocaleDateString('pt-BR');
+
+            let dayQuestions = [];
+            Object.keys(state.answers).forEach(id => {
+                const a = getAnsObj(id);
+                if (a && a.dateStr === date) {
+                    const q = DB_QUESTIONS.find(item => item.id == id);
+                    if (q) dayQuestions.push({ q, a });
+                }
+            });
+
+            dayQuestions.sort((x, y) => y.a.timestamp - x.a.timestamp);
+
+            const total = dayQuestions.length;
+            const correct = dayQuestions.filter(x => x.a.isCorrect).length;
+            const wrong = total - correct;
+            const acc = total > 0 ? Math.round((correct / total) * 100) : 0;
+
+            document.getElementById('dayDone').innerText = total;
+            document.getElementById('dayCorrect').innerText = correct;
+            document.getElementById('dayWrong').innerText = wrong;
+            document.getElementById('dayAcc').innerText = acc + '%';
+
+            let filtered = dayQuestions.filter(x => {
+                if (dayFilter === 'certas') return x.a.isCorrect;
+                if (dayFilter === 'erradas') return !x.a.isCorrect;
+                return true;
+            });
+
+            if (filtered.length === 0) {
+                list.innerHTML = `
+                    <div style="text-align:center; padding:35px 20px; background:var(--surface); border:1px dashed var(--border); border-radius:var(--radius-md); color:var(--text-muted); font-weight:700;">
+                        Nenhuma questão encontrada para este filtro no dia ${date}.
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            filtered.forEach(item => {
+                const q = item.q;
+                const a = item.a;
+                const isRight = a.isCorrect;
+                const chosenLetter = String.fromCharCode(65 + a.choice);
+                const chosenText = q.opcoes[a.choice] ? q.opcoes[a.choice].replace(/^[A-E]\)\s*/, '') : '';
+                const correctLetter = String.fromCharCode(65 + q.correta);
+                const correctText = q.opcoes[q.correta].replace(/^[A-E]\)\s*/, '');
+                const svgMarkup = getSvgIllustration(q.svg_type);
+
+                html += `
+                    <div class="q-item ${isRight ? 'correct' : 'wrong'}">
+                        <div class="q-header">
+                            <div class="q-badge-box">
+                                <span class="tag-mat">${q.materia}</span>
+                                <span class="tag-tema">Questão #${q.id} • ${q.tema}</span>
+                            </div>
+                            <span style="font-size:0.75rem; font-weight:800; color:${isRight ? 'var(--success)' : 'var(--danger)'}">
+                                ${isRight ? '✅ ACERTOU' : '❌ ERROU'}
+                            </span>
+                        </div>
+                        <div class="q-text">${q.enunciado}</div>
+                        
+                        <div class="fb-box ${isRight ? 'correct' : 'wrong'}">
+                            <strong>Você marcou: Letra ${chosenLetter} ("${chosenText}")</strong><br>
+                            <strong>Gabarito Oficial: Letra ${correctLetter} ("${correctText}")</strong>
+                            
+                            <div style="margin-top:8px;">
+                                <strong>💡 Explicação da Resposta:</strong><br>
+                                ${q.comentario}
+                            </div>
+
+                            <div class="illustration-wrap">
+                                <div class="illustration-title">📐 Desenho Explicativo</div>
+                                ${svgMarkup}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            list.innerHTML = html;
+        }
+
+        function cleanSelectedDayAnswers() {
+            const date = selectedHistoryDate;
+            if (!confirm(`Deseja realmente apagar todas as respostas registradas no dia ${date}?`)) return;
+
+            Object.keys(state.answers).forEach(id => {
+                const a = getAnsObj(id);
+                if (a && a.dateStr === date) {
+                    delete state.answers[id];
+                }
+            });
+
+            saveStorage();
+            populateHistoryDates();
+            renderDailyHistory();
+            renderQuestions();
+            alert(`Respostas do dia ${date} foram removidas com sucesso!`);
+        }
+
+        function updateSliderLabel() {
+            const val = document.getElementById('cleanLastSlider').value;
+            document.getElementById('sliderValDisplay').innerText = val;
+            document.getElementById('sliderBtnVal').innerText = val;
+        }
+
+        function cleanLastNAnswers() {
+            const n = parseInt(document.getElementById('cleanLastSlider').value);
+            const ansEntries = [];
+            Object.keys(state.answers).forEach(id => {
+                const a = getAnsObj(id);
+                if (a) ansEntries.push({ id, timestamp: a.timestamp || 0 });
+            });
+
+            if (ansEntries.length === 0) {
+                alert("Nenhuma resposta registrada para apagar.");
+                return;
+            }
+
+            if (!confirm(`Deseja realmente apagar as últimas ${n} respostas respondidas?`)) return;
+
+            ansEntries.sort((x, y) => y.timestamp - x.timestamp);
+            const toDelete = ansEntries.slice(0, n);
+
+            toDelete.forEach(item => {
+                delete state.answers[item.id];
+            });
+
+            saveStorage();
+            populateHistoryDates();
+            renderDailyHistory();
+            renderQuestions();
+            alert(`As últimas ${toDelete.length} respostas foram apagadas!`);
+        }
+
+        /* ==========================================
+           SINCRONIZAÇÃO ONLINE / MULTI-APARELHOS
+           ========================================== */
+        function openSyncModal() {
+            document.getElementById('modalSync').classList.add('active');
+        }
+
+        function closeSyncModal() {
+            document.getElementById('modalSync').classList.remove('active');
+        }
+
+        function getEncodedProgress() {
+            const cleanState = {
+                userName: state.userName,
+                dailyGoal: state.dailyGoal,
+                answers: state.answers,
+                favs: state.favs,
+                celebratedMilestones: state.celebratedMilestones
+            };
+            return btoa(unescape(encodeURIComponent(JSON.stringify(cleanState))));
+        }
+
+        function copySyncLink() {
+            const code = getEncodedProgress();
+            const baseUrl = window.location.href.split('#')[0];
+            const fullLink = `${baseUrl}#sync=${code}`;
+
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(fullLink).then(() => {
+                    alert("Link de sincronização copiado! Envie pelo WhatsApp ou abra no outro aparelho para carregar seu progresso instantaneamente.");
+                }).catch(() => prompt("Copie seu link abaixo:", fullLink));
+            } else {
+                prompt("Copie seu link abaixo:", fullLink);
+            }
+        }
+
+        function copyProgressCode() {
+            const code = getEncodedProgress();
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(code).then(() => {
+                    alert("Código de progresso copiado!");
+                }).catch(() => prompt("Copie o código:", code));
+            } else {
+                prompt("Copie o código:", code);
+            }
+        }
+
+        function restoreProgressFromCode() {
+            const raw = document.getElementById('importCodeInput').value.trim();
+            if (!raw) return alert("Por favor, cole um código válido.");
+            try {
+                const decoded = JSON.parse(decodeURIComponent(escape(atob(raw))));
+                if (decoded && decoded.answers) {
+                    state.userName = decoded.userName || state.userName;
+                    state.dailyGoal = decoded.dailyGoal || state.dailyGoal;
+                    state.answers = { ...state.answers, ...decoded.answers };
+                    state.favs = { ...state.favs, ...decoded.favs };
+                    saveStorage();
+                    renderQuestions();
+                    closeSyncModal();
+                    alert("Progresso restaurado com sucesso em seu aparelho!");
+                } else {
+                    alert("Código inválido.");
+                }
+            } catch(e) {
+                alert("Erro ao decodificar. Verifique se o código foi copiado por completo.");
+            }
+        }
+
+        function checkUrlSync() {
+            const hash = window.location.hash;
+            if (hash && hash.includes('sync=')) {
+                const code = hash.split('sync=')[1];
+                if (code) {
+                    try {
+                        const decoded = JSON.parse(decodeURIComponent(escape(atob(code))));
+                        if (decoded && decoded.answers) {
+                            const count = Object.keys(decoded.answers).length;
+                            if (confirm(`Detectamos um progresso salvo de ${count} questões para ${decoded.userName || 'o estudante'}! Deseja sincronizar e carregar agora neste aparelho?`)) {
+                                state.userName = decoded.userName || state.userName;
+                                state.dailyGoal = decoded.dailyGoal || state.dailyGoal;
+                                state.answers = { ...state.answers, ...decoded.answers };
+                                state.favs = { ...state.favs, ...decoded.favs };
+                                saveStorage();
+                                window.location.hash = '';
+                            }
+                        }
+                    } catch(e) {}
+                }
             }
         }
 
@@ -1267,7 +2384,6 @@
                         <div class="tip-title">${t.titulo}</div>
                         <div class="tip-resumo">${t.resumo}</div>
                         
-                        <!-- Ilustração no Card -->
                         <div class="illustration-wrap">
                             <div class="illustration-title">📐 Diagrama Visual de Apoio</div>
                             ${svgMarkup}
@@ -1314,18 +2430,21 @@
             }
         }
 
-        /* Estatísticas Gerais */
+        /* Atualização das Métricas Gerais */
         function updateStatsUI() {
             const ansKeys = Object.keys(state.answers);
             const totalDone = ansKeys.length;
             let correct = 0;
             let wrong = 0;
+            let todayCount = 0;
+            const todayStr = new Date().toLocaleDateString('pt-BR');
 
             ansKeys.forEach(id => {
-                const q = DB_QUESTIONS.find(item => item.id == id);
-                if (q) {
-                    if (state.answers[id] === q.correta) correct++;
+                const a = getAnsObj(id);
+                if (a) {
+                    if (a.isCorrect) correct++;
                     else wrong++;
+                    if (a.dateStr === todayStr) todayCount++;
                 }
             });
 
@@ -1333,21 +2452,24 @@
             const acc = totalDone > 0 ? Math.round((correct / totalDone) * 100) : 0;
 
             document.getElementById('topDone').innerText = totalDone;
+            document.getElementById('topCorrect').innerText = correct;
+            document.getElementById('topWrong').innerText = wrong;
             document.getElementById('topAccuracy').innerText = acc + '%';
-            document.getElementById('topSaved').innerText = favCount;
 
             document.getElementById('sTotalDone').innerText = `${totalDone} / 1000`;
             document.getElementById('sCorrect').innerText = correct;
             document.getElementById('sWrong').innerText = wrong;
             document.getElementById('sFavs').innerText = favCount;
-        }
+            document.getElementById('sTodayCount').innerText = todayCount;
 
-        function resetProgress() {
-            if (confirm("Camily, deseja realmente zerar todo o progresso e começar de novo?")) {
-                state = { answers: {}, favs: {} };
-                saveStorage();
-                renderQuestions();
-            }
+            const bErr = document.getElementById('badgeErradas');
+            if (bErr) bErr.innerText = wrong;
+            const bAcc = document.getElementById('badgeAcertos');
+            if (bAcc) bAcc.innerText = correct;
+            const bFav = document.getElementById('badgeFavs');
+            if (bFav) bFav.innerText = favCount;
+
+            updateDailyGoalUI();
         }
 
         function initTheme() {
@@ -1371,6 +2493,8 @@
             renderQuestions();
             renderTips();
             updateStatsUI();
+            updateNameUI();
+            updateDailyGoalUI();
         });
     </script>
 </body>
