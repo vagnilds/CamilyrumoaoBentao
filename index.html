@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Camily Rumo à Vaga no Bento Quirino! • 1.000 Questões & 1.000 Bizus</title>
     <style>
         :root {
@@ -40,6 +40,18 @@
             --shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
+        html, body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-size: 16px;
+            line-height: 1.5;
+            -webkit-text-size-adjust: 100%;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -50,13 +62,11 @@
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text-main);
             padding-bottom: 95px;
             min-height: 100vh;
-            line-height: 1.5;
         }
 
+        /* Header Fixo e Responsivo */
         header {
             position: sticky;
             top: 0;
@@ -68,12 +78,14 @@
             align-items: center;
             justify-content: space-between;
             box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+            width: 100%;
         }
 
         .brand {
             display: flex;
             align-items: center;
             gap: 10px;
+            min-width: 0;
         }
 
         .brand-badge {
@@ -88,6 +100,11 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 2px 6px rgba(29,78,216,0.3);
+            flex-shrink: 0;
+        }
+
+        .brand-text {
+            min-width: 0;
         }
 
         .brand-text h1 {
@@ -95,32 +112,39 @@
             font-weight: 900;
             line-height: 1.2;
             color: var(--text-main);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .brand-text p {
             font-size: 0.72rem;
             color: var(--text-muted);
             font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .header-actions {
             display: flex;
             align-items: center;
             gap: 8px;
+            flex-shrink: 0;
         }
 
         .btn-icon {
             background: var(--surface-alt);
             border: 1px solid var(--border);
             color: var(--text-main);
-            width: 42px;
-            height: 42px;
+            width: 40px;
+            height: 40px;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1.15rem;
         }
 
         .btn-cloud {
@@ -135,7 +159,7 @@
             align-items: center;
             gap: 6px;
             cursor: pointer;
-            min-height: 42px;
+            min-height: 40px;
         }
 
         .dark-mode .btn-cloud {
@@ -145,9 +169,10 @@
         }
 
         .container {
+            width: 100%;
             max-width: 800px;
             margin: 0 auto;
-            padding: 14px;
+            padding: 12px;
         }
 
         /* Banner de Troca de Nome */
@@ -156,14 +181,15 @@
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
             padding: 10px 14px;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 8px;
             flex-wrap: wrap;
             box-shadow: var(--shadow);
-            font-size: 0.85rem;
+            font-size: 0.86rem;
+            width: 100%;
         }
 
         .name-highlight {
@@ -172,14 +198,21 @@
         }
 
         .btn-name-switch {
-            background: none;
-            border: none;
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
             color: var(--primary);
-            font-weight: 700;
-            font-size: 0.82rem;
-            text-decoration: underline;
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 6px 12px;
+            border-radius: 20px;
             cursor: pointer;
-            padding: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-name-switch:active {
+            background: var(--border);
         }
 
         /* Hero Box */
@@ -187,10 +220,10 @@
             background: linear-gradient(135deg, #1e3a8a, #312e81, #6b21a8);
             color: white;
             border-radius: var(--radius-lg);
-            padding: 22px 18px;
+            padding: 20px 16px;
             margin-bottom: 16px;
             box-shadow: 0 10px 20px -5px rgba(30,58,138,0.3);
-            position: relative;
+            width: 100%;
         }
 
         .hero-tag {
@@ -205,16 +238,17 @@
         }
 
         .hero-title {
-            font-size: 1.45rem;
+            font-size: 1.35rem;
             font-weight: 900;
             line-height: 1.25;
             margin-bottom: 6px;
+            word-break: break-word;
         }
 
         .hero-sub {
-            font-size: 0.86rem;
+            font-size: 0.85rem;
             opacity: 0.92;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .hero-metrics-row {
@@ -223,12 +257,13 @@
             gap: 6px;
             background: rgba(0,0,0,0.25);
             border-radius: var(--radius-md);
-            padding: 10px 6px;
+            padding: 10px 4px;
             text-align: center;
+            width: 100%;
         }
 
         .hero-m-val {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: 900;
         }
 
@@ -243,11 +278,11 @@
             background: var(--surface);
             border: 2px solid var(--border);
             border-radius: var(--radius-lg);
-            padding: 18px;
-            margin-bottom: 18px;
+            padding: 16px;
+            margin-bottom: 16px;
             box-shadow: var(--shadow);
             transition: all 0.25s ease;
-            position: relative;
+            width: 100%;
         }
 
         .goal-card.completed {
@@ -267,7 +302,7 @@
             align-items: center;
             margin-bottom: 12px;
             flex-wrap: wrap;
-            gap: 6px;
+            gap: 8px;
         }
 
         .goal-title-wrap {
@@ -277,7 +312,7 @@
         }
 
         .goal-title {
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 900;
             color: var(--text-main);
         }
@@ -286,24 +321,53 @@
             background: linear-gradient(135deg, #f59e0b, #d97706);
             color: white;
             font-weight: 900;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             padding: 6px 14px;
             border-radius: 20px;
             display: flex;
             align-items: center;
             gap: 6px;
             box-shadow: 0 2px 5px rgba(217,119,6,0.3);
+            flex-shrink: 0;
         }
 
-        /* Seletor de Meta Rápida */
+        /* Controles de Meta Rápida e Botões +/- */
+        .goal-adjust-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-stepper {
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            font-weight: 800;
+            font-size: 0.85rem;
+            cursor: pointer;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-stepper:active {
+            background: var(--border);
+        }
+
         .goal-picker-row {
             display: flex;
             align-items: center;
             gap: 6px;
-            margin-bottom: 14px;
             overflow-x: auto;
-            padding-bottom: 4px;
+            padding-bottom: 6px;
             scrollbar-width: none;
+            width: 100%;
         }
 
         .goal-picker-row::-webkit-scrollbar {
@@ -321,6 +385,7 @@
             cursor: pointer;
             white-space: nowrap;
             transition: all 0.15s ease;
+            flex-shrink: 0;
         }
 
         .goal-pill.active {
@@ -330,7 +395,8 @@
         }
 
         .goal-progress-wrap {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            width: 100%;
         }
 
         .goal-progress-labels {
@@ -348,6 +414,7 @@
             overflow: hidden;
             border: 1px solid var(--border);
             position: relative;
+            width: 100%;
         }
 
         .goal-progress-bar {
@@ -355,7 +422,7 @@
             background: linear-gradient(90deg, #3b82f6, #10b981);
             width: 0%;
             border-radius: 10px;
-            transition: width 0.4s ease;
+            transition: width 0.3s ease;
         }
 
         .goal-card.completed .goal-progress-bar {
@@ -363,11 +430,11 @@
         }
 
         .goal-msg {
-            font-size: 0.86rem;
+            font-size: 0.84rem;
             font-weight: 600;
             line-height: 1.45;
             color: var(--text-muted);
-            margin-top: 8px;
+            margin-top: 6px;
         }
 
         .goal-card.completed .goal-msg {
@@ -384,7 +451,8 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 10px;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
+            width: 100%;
         }
 
         @media (min-width: 600px) {
@@ -422,7 +490,7 @@
         }
 
         .stat-val {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 800;
             line-height: 1.1;
         }
@@ -435,6 +503,7 @@
 
         .tab-panel {
             display: none;
+            width: 100%;
         }
 
         .tab-panel.active {
@@ -455,6 +524,7 @@
             padding: 12px;
             margin-bottom: 16px;
             box-shadow: var(--shadow);
+            width: 100%;
         }
 
         .search-input {
@@ -464,7 +534,7 @@
             border: 1px solid var(--border);
             background: var(--surface-alt);
             color: var(--text-main);
-            font-size: 0.92rem;
+            font-size: 0.95rem;
             font-weight: 600;
             margin-bottom: 10px;
             outline: none;
@@ -480,6 +550,7 @@
             overflow-x: auto;
             padding-bottom: 6px;
             scrollbar-width: none;
+            width: 100%;
         }
 
         .pills-bar::-webkit-scrollbar {
@@ -531,8 +602,10 @@
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
             padding: 16px;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
             box-shadow: var(--shadow);
+            width: 100%;
+            word-break: break-word;
         }
 
         .q-item.correct {
@@ -600,11 +673,12 @@
             white-space: pre-line;
         }
 
-        /* Botões de Alternativa */
+        /* Botões de Alternativa Grandes e Responsivos */
         .options-box {
             display: flex;
             flex-direction: column;
             gap: 10px;
+            width: 100%;
         }
 
         .opt-btn {
@@ -681,6 +755,7 @@
             border-left: 4px solid var(--primary);
             font-size: 0.88rem;
             line-height: 1.5;
+            width: 100%;
         }
 
         .fb-box.correct {
@@ -732,6 +807,7 @@
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
             text-align: center;
+            width: 100%;
         }
 
         .illustration-title {
@@ -766,6 +842,7 @@
             align-items: center;
             gap: 10px;
             margin: 20px 0;
+            width: 100%;
         }
 
         .btn-page {
@@ -795,6 +872,7 @@
             padding: 16px;
             margin-bottom: 16px;
             box-shadow: var(--shadow);
+            width: 100%;
         }
 
         .tip-top {
@@ -846,6 +924,7 @@
             padding: 14px;
             margin-bottom: 16px;
             box-shadow: var(--shadow);
+            width: 100%;
         }
 
         .date-select {
@@ -867,6 +946,7 @@
             padding: 14px;
             margin-top: 14px;
             border: 1px solid var(--border);
+            width: 100%;
         }
 
         .slider-box {
@@ -874,6 +954,7 @@
             align-items: center;
             gap: 12px;
             margin: 10px 0;
+            width: 100%;
         }
 
         .range-slider {
@@ -895,6 +976,7 @@
             justify-content: space-around;
             padding: 8px 4px;
             box-shadow: 0 -2px 10px rgba(0,0,0,0.06);
+            width: 100%;
         }
 
         .nav-touch-item {
@@ -939,24 +1021,24 @@
             backdrop-filter: blur(4px);
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 16px;
         }
 
         .modal-overlay.active {
             display: flex;
-            animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         @keyframes popIn {
-            from { opacity: 0; transform: scale(0.9); }
+            from { opacity: 0; transform: scale(0.92); }
             to { opacity: 1; transform: scale(1); }
         }
 
         .modal-card {
             background: var(--surface);
             border-radius: var(--radius-lg);
-            padding: 24px 20px;
-            max-width: 460px;
+            padding: 24px 18px;
+            max-width: 440px;
             width: 100%;
             text-align: center;
             box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3);
@@ -966,24 +1048,24 @@
         }
 
         .modal-emoji {
-            font-size: 3.5rem;
-            margin-bottom: 12px;
+            font-size: 3rem;
+            margin-bottom: 10px;
             line-height: 1;
         }
 
         .modal-title {
-            font-size: 1.35rem;
+            font-size: 1.25rem;
             font-weight: 900;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             color: var(--text-main);
             line-height: 1.25;
         }
 
         .modal-msg {
-            font-size: 0.92rem;
+            font-size: 0.9rem;
             color: var(--text-muted);
             line-height: 1.5;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .modal-btn-primary {
@@ -1039,7 +1121,7 @@
                 👋 Estudando como: <span class="name-highlight" id="displayStudentName">Camily</span>
             </div>
             <button type="button" class="btn-name-switch" onclick="openNameModal()">
-                Não é a Camily? Insira seu nome e estude com ela!
+                ✏️ Não é a Camily? Mudar nome
             </button>
         </div>
 
@@ -1081,10 +1163,17 @@
                     </div>
                 </div>
 
-                <!-- Seletor de Meta Rápida -->
-                <div style="font-size:0.75rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">
-                    ESCOLHA SUA META DIÁRIA:
+                <!-- Botões de Ajuste Rápido (+ / -) e Pílulas -->
+                <div class="goal-adjust-row">
+                    <div style="font-size:0.75rem; font-weight:700; color:var(--text-muted);">
+                        ESCOLHA SUA META:
+                    </div>
+                    <div style="display:flex; gap:6px;">
+                        <button type="button" class="btn-stepper" onclick="stepDailyGoal(-5)">➖ 5 questões</button>
+                        <button type="button" class="btn-stepper" onclick="stepDailyGoal(5)">➕ 5 questões</button>
+                    </div>
                 </div>
+
                 <div class="goal-picker-row" id="goalPickerBar">
                     <button type="button" class="goal-pill" onclick="setDailyGoal(10)">10 questões</button>
                     <button type="button" class="goal-pill" onclick="setDailyGoal(15)">15 questões</button>
@@ -1292,7 +1381,7 @@
             <div class="modal-emoji">👋✏️</div>
             <h3 class="modal-title">Quem está estudando agora?</h3>
             <p class="modal-msg">Insira seu nome para personalizar as metas, celebrações e o histórico com o seu perfil!</p>
-            <input type="text" id="userNameInput" class="search-input" style="font-size:1.1rem; text-align:center;" placeholder="Seu nome aqui...">
+            <input type="text" id="userNameInput" class="search-input" style="font-size:1.1rem; text-align:center;" placeholder="Seu nome aqui..." onkeydown="if(event.key==='Enter') saveNewUserName()">
             <button type="button" class="modal-btn-primary" onclick="saveNewUserName()">
                 Salvar Meu Nome
             </button>
@@ -1589,6 +1678,30 @@
             return SVG_LIB[type] || SVG_LIB['pitagoras'];
         }
 
+        // HELPERS SEGUROS PARA MANIPULAÇÃO DO DOM (ZERO ERROS NULL)
+        function $(id) {
+            return document.getElementById(id);
+        }
+        function setText(id, txt) {
+            const el = $(id);
+            if (el) el.innerText = txt;
+        }
+        function setHtml(id, html) {
+            const el = $(id);
+            if (el) el.innerHTML = html;
+        }
+        function setVal(id, val) {
+            const el = $(id);
+            if (el) el.value = val;
+        }
+        function setClass(id, cls, add) {
+            const el = $(id);
+            if (el) {
+                if (add) el.classList.add(cls);
+                else el.classList.remove(cls);
+            }
+        }
+
         // ESTADO GLOBAL COM META DIÁRIA
         let state = {
             userName: "Camily",
@@ -1616,7 +1729,7 @@
 
         function loadStorage() {
             try {
-                const s = localStorage.getItem('bq_camily_v4');
+                const s = localStorage.getItem('bq_camily_v5');
                 if (s) state = JSON.parse(s);
             } catch(e) {}
             
@@ -1626,7 +1739,7 @@
 
         function saveStorage() {
             try {
-                localStorage.setItem('bq_camily_v4', JSON.stringify(state));
+                localStorage.setItem('bq_camily_v5', JSON.stringify(state));
             } catch(e) {}
             updateStatsUI();
             updateNameUI();
@@ -1635,23 +1748,28 @@
 
         function updateNameUI() {
             const name = state.userName || "Camily";
-            document.getElementById('displayStudentName').innerText = name;
-            document.getElementById('headerTitle').innerText = `${name} • Bento Quirino`;
-            document.getElementById('heroTitle').innerText = `${name} Rumo à Vaga no Bento Quirino! 🚀`;
+            setText('displayStudentName', name);
+            setText('headerTitle', `${name} • Bento Quirino`);
+            setText('heroTitle', `${name} Rumo à Vaga no Bento Quirino! 🚀`);
         }
 
         /* Modal Trocar Nome */
         function openNameModal() {
-            document.getElementById('userNameInput').value = state.userName || "Camily";
-            document.getElementById('modalName').classList.add('active');
+            setVal('userNameInput', state.userName || "Camily");
+            setClass('modalName', 'active', true);
+            setTimeout(() => {
+                const inp = $('userNameInput');
+                if (inp) inp.focus();
+            }, 150);
         }
 
         function closeNameModal() {
-            document.getElementById('modalName').classList.remove('active');
+            setClass('modalName', 'active', false);
         }
 
         function saveNewUserName() {
-            const val = document.getElementById('userNameInput').value.trim();
+            const inp = $('userNameInput');
+            const val = inp ? inp.value.trim() : '';
             if (val) {
                 state.userName = val;
                 saveStorage();
@@ -1663,22 +1781,30 @@
            SISTEMA DE META DIÁRIA E PONTUAÇÃO (HOME)
            ========================================== */
         function setDailyGoal(goalNum) {
-            state.dailyGoal = goalNum;
-            saveStorage();
-            updateDailyGoalUI();
+            if (goalNum > 0) {
+                state.dailyGoal = goalNum;
+                saveStorage();
+            }
+        }
+
+        function stepDailyGoal(delta) {
+            let current = state.dailyGoal || 20;
+            current = Math.max(5, current + delta);
+            setDailyGoal(current);
         }
 
         function openCustomGoalModal() {
-            document.getElementById('customGoalInput').value = state.dailyGoal || 20;
-            document.getElementById('modalCustomGoal').classList.add('active');
+            setVal('customGoalInput', state.dailyGoal || 20);
+            setClass('modalCustomGoal', 'active', true);
         }
 
         function closeCustomGoalModal() {
-            document.getElementById('modalCustomGoal').classList.remove('active');
+            setClass('modalCustomGoal', 'active', false);
         }
 
         function saveCustomGoal() {
-            const val = parseInt(document.getElementById('customGoalInput').value);
+            const inp = $('customGoalInput');
+            const val = inp ? parseInt(inp.value) : 20;
             if (val && val > 0) {
                 setDailyGoal(val);
             }
@@ -1700,19 +1826,17 @@
             });
 
             const todayWrong = todayCount - todayCorrect;
-            // Pontuação: 10 pontos por acerto + 2 pontos por tentativa respondida
             const todayScore = (todayCorrect * 10) + (todayWrong * 2);
 
-            // Atualiza o display da meta
-            document.getElementById('goalTargetDisplay').innerText = goal;
-            document.getElementById('dailyScoreDisplay').innerText = todayScore;
-            document.getElementById('goalCountTxt').innerText = `${todayCount} de ${goal} questões concluídas hoje (${todayCorrect} acertos)`;
+            setText('goalTargetDisplay', goal);
+            setText('dailyScoreDisplay', todayScore);
+            setText('goalCountTxt', `${todayCount} de ${goal} questões concluídas hoje (${todayCorrect} acertos)`);
 
             const pct = Math.min(100, Math.round((todayCount / goal) * 100));
-            document.getElementById('goalPercentTxt').innerText = pct + '%';
-            document.getElementById('goalProgressBar').style.width = pct + '%';
+            setText('goalPercentTxt', pct + '%');
+            const bar = $('goalProgressBar');
+            if (bar) bar.style.width = pct + '%';
 
-            // Atualiza status das pills da meta
             document.querySelectorAll('#goalPickerBar .goal-pill').forEach(btn => {
                 btn.classList.remove('active');
                 if (btn.innerText.startsWith(goal + ' ')) {
@@ -1720,20 +1844,22 @@
                 }
             });
 
-            const card = document.getElementById('dailyGoalCard');
-            const msgEl = document.getElementById('goalMessage');
+            const card = $('dailyGoalCard');
+            const msgEl = $('goalMessage');
             const name = state.userName || "Camily";
 
             if (todayCount >= goal) {
-                card.classList.add('completed');
-                msgEl.innerHTML = `🎉 <strong>META DO DIA BATIDA! Parabéns, ${name}!</strong> Você concluiu ${todayCount} questões hoje e acumulou <strong>${todayScore} pontos</strong>! Continue assim para garantir sua aprovação no Bento Quirino! 🌟`;
+                if (card) card.classList.add('completed');
+                if (msgEl) msgEl.innerHTML = `🎉 <strong>META DO DIA BATIDA! Parabéns, ${name}!</strong> Você concluiu ${todayCount} questões hoje e acumulou <strong>${todayScore} pontos</strong>! Continue assim para garantir sua aprovação no Bento Quirino! 🌟`;
             } else {
-                card.classList.remove('completed');
+                if (card) card.classList.remove('completed');
                 const remaining = goal - todayCount;
-                if (todayCount === 0) {
-                    msgEl.innerText = `Vamos começar os estudos de hoje? Faltam ${goal} questões para bater sua meta diária e pontuar!`;
-                } else {
-                    msgEl.innerText = `Foco, ${name}! Você já fez ${todayCount} questões (+${todayScore} pts). Faltam apenas ${remaining} questões para bater sua meta de hoje! 🚀`;
+                if (msgEl) {
+                    if (todayCount === 0) {
+                        msgEl.innerText = `Vamos começar os estudos de hoje? Faltam ${goal} questões para bater sua meta diária e pontuar!`;
+                    } else {
+                        msgEl.innerText = `Foco, ${name}! Você já fez ${todayCount} questões (+${todayScore} pts). Faltam apenas ${remaining} questões para bater sua meta de hoje! 🚀`;
+                    }
                 }
             }
         }
@@ -1743,18 +1869,18 @@
             document.querySelectorAll('.tab-panel').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-touch-item').forEach(el => el.classList.remove('active'));
 
-            const target = document.getElementById('panel-' + id);
+            const target = $('panel-' + id);
             if (target) target.classList.add('active');
 
             const navs = document.querySelectorAll('.nav-touch-item');
-            if (id === 'dash') navs[0].classList.add('active');
-            if (id === 'questoes') navs[1].classList.add('active');
+            if (id === 'dash') if (navs[0]) navs[0].classList.add('active');
+            if (id === 'questoes') if (navs[1]) navs[1].classList.add('active');
             if (id === 'historico') {
-                navs[2].classList.add('active');
+                if (navs[2]) navs[2].classList.add('active');
                 populateHistoryDates();
                 renderDailyHistory();
             }
-            if (id === 'cards') navs[3].classList.add('active');
+            if (id === 'cards') if (navs[3]) navs[3].classList.add('active');
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -1791,7 +1917,9 @@
         }
 
         function renderQuestions() {
-            const list = document.getElementById('questionsList');
+            const list = $('questionsList');
+            if (!list) return;
+
             const filtered = getFilteredQuestions();
             const totalPages = Math.ceil(filtered.length / Q_PER_PAGE) || 1;
             if (qPage > totalPages) qPage = totalPages;
@@ -1801,9 +1929,11 @@
             if (qFilter === 'Erradas') filterLabel = '❌ Questões Erradas';
             if (qFilter === 'Acertos') filterLabel = '✅ Questões Acertadas';
 
-            document.getElementById('pageQIndicator').innerText = `Página ${qPage} de ${totalPages} (${filtered.length} em ${filterLabel})`;
-            document.getElementById('btnPrevQ').disabled = (qPage <= 1);
-            document.getElementById('btnNextQ').disabled = (qPage >= totalPages);
+            setText('pageQIndicator', `Página ${qPage} de ${totalPages} (${filtered.length} em ${filterLabel})`);
+            const prevBtn = $('btnPrevQ');
+            if (prevBtn) prevBtn.disabled = (qPage <= 1);
+            const nextBtn = $('btnNextQ');
+            if (nextBtn) nextBtn.disabled = (qPage >= totalPages);
 
             const start = (qPage - 1) * Q_PER_PAGE;
             const currentSlice = filtered.slice(start, start + Q_PER_PAGE);
@@ -1857,7 +1987,7 @@
                     if (isRight) {
                         fbHtml = `
                             <div class="fb-box correct">
-                                <strong>🎉 Muito bem, ${state.userName}! Resposta Certa! (+10 pts) (Gabarito: Letra ${correctLetter})</strong>
+                                <strong>🎉 Muito bem, ${state.userName || 'Camily'}! Resposta Certa! (+10 pts) (Gabarito: Letra ${correctLetter})</strong>
                                 
                                 <div class="correct-explanation-box">
                                     <strong>✅ Por que a Letra ${correctLetter} está certa:</strong><br>
@@ -1978,23 +2108,23 @@
 
         function showCelebrationModal(count) {
             const name = state.userName || "Filha";
-            document.getElementById('celebrationTitle').innerText = `Parabéns ${name}, você acertou ${count} questões!`;
-            document.getElementById('celebrationMsg').innerHTML = `Você acabou de completar mais 10 acertos, totalizando <strong>${count} acertos</strong>! Cada questão resolvida com dedicação coloca você cada vez mais perto da sua vaga no Bento Quirino! Continue com esse foco maravilhoso! 🌟`;
-            document.getElementById('modalCelebration').classList.add('active');
+            setText('celebrationTitle', `Parabéns ${name}, você acertou ${count} questões!`);
+            setHtml('celebrationMsg', `Você acabou de completar mais 10 acertos, totalizando <strong>${count} acertos</strong>! Cada questão resolvida com dedicação coloca você cada vez mais perto da sua vaga no Bento Quirino! Continue com esse foco maravilhoso! 🌟`);
+            setClass('modalCelebration', 'active', true);
         }
 
         function closeCelebrationModal() {
-            document.getElementById('modalCelebration').classList.remove('active');
+            setClass('modalCelebration', 'active', false);
         }
 
         function showErrorStreakModal() {
             const name = state.userName || "Filha";
-            document.getElementById('errorModalTitle').innerText = `Calma, ${name}! Vamos respirar fundo?`;
-            document.getElementById('modalErrorStreak').classList.add('active');
+            setText('errorModalTitle', `Calma, ${name}! Vamos respirar fundo?`);
+            setClass('modalErrorStreak', 'active', true);
         }
 
         function closeErrorStreakModal() {
-            document.getElementById('modalErrorStreak').classList.remove('active');
+            setClass('modalErrorStreak', 'active', false);
         }
 
         function goToWrongQuestionsFromModal() {
@@ -2019,7 +2149,8 @@
         }
 
         function handleSearch() {
-            qSearch = document.getElementById('qSearchInput').value;
+            const inp = $('qSearchInput');
+            qSearch = inp ? inp.value : '';
             qPage = 1;
             renderQuestions();
         }
@@ -2049,7 +2180,9 @@
         let dayFilter = 'todas';
 
         function populateHistoryDates() {
-            const select = document.getElementById('historyDateSelect');
+            const select = $('historyDateSelect');
+            if (!select) return;
+
             const datesSet = new Set();
             const todayStr = new Date().toLocaleDateString('pt-BR');
             
@@ -2085,7 +2218,7 @@
             select.value = selectedHistoryDate;
 
             const totalAns = Object.keys(state.answers).length;
-            const slider = document.getElementById('cleanLastSlider');
+            const slider = $('cleanLastSlider');
             if (slider) {
                 slider.max = Math.max(totalAns, 1);
                 if (parseInt(slider.value) > totalAns) slider.value = Math.min(totalAns, 5);
@@ -2094,19 +2227,22 @@
         }
 
         function changeHistoryDate() {
-            selectedHistoryDate = document.getElementById('historyDateSelect').value;
+            const sel = $('historyDateSelect');
+            selectedHistoryDate = sel ? sel.value : '';
             renderDailyHistory();
         }
 
         function setDayFilter(type) {
             dayFilter = type;
             document.querySelectorAll('#dayFilterPills .pill-btn').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
+            if (event && event.target) event.target.classList.add('active');
             renderDailyHistory();
         }
 
         function renderDailyHistory() {
-            const list = document.getElementById('dayQuestionsList');
+            const list = $('dayQuestionsList');
+            if (!list) return;
+
             const date = selectedHistoryDate || new Date().toLocaleDateString('pt-BR');
 
             let dayQuestions = [];
@@ -2125,10 +2261,10 @@
             const wrong = total - correct;
             const acc = total > 0 ? Math.round((correct / total) * 100) : 0;
 
-            document.getElementById('dayDone').innerText = total;
-            document.getElementById('dayCorrect').innerText = correct;
-            document.getElementById('dayWrong').innerText = wrong;
-            document.getElementById('dayAcc').innerText = acc + '%';
+            setText('dayDone', total);
+            setText('dayCorrect', correct);
+            setText('dayWrong', wrong);
+            setText('dayAcc', acc + '%');
 
             let filtered = dayQuestions.filter(x => {
                 if (dayFilter === 'certas') return x.a.isCorrect;
@@ -2209,13 +2345,15 @@
         }
 
         function updateSliderLabel() {
-            const val = document.getElementById('cleanLastSlider').value;
-            document.getElementById('sliderValDisplay').innerText = val;
-            document.getElementById('sliderBtnVal').innerText = val;
+            const slider = $('cleanLastSlider');
+            const val = slider ? slider.value : '5';
+            setText('sliderValDisplay', val);
+            setText('sliderBtnVal', val);
         }
 
         function cleanLastNAnswers() {
-            const n = parseInt(document.getElementById('cleanLastSlider').value);
+            const slider = $('cleanLastSlider');
+            const n = slider ? parseInt(slider.value) : 5;
             const ansEntries = [];
             Object.keys(state.answers).forEach(id => {
                 const a = getAnsObj(id);
@@ -2247,11 +2385,11 @@
            SINCRONIZAÇÃO ONLINE / MULTI-APARELHOS
            ========================================== */
         function openSyncModal() {
-            document.getElementById('modalSync').classList.add('active');
+            setClass('modalSync', 'active', true);
         }
 
         function closeSyncModal() {
-            document.getElementById('modalSync').classList.remove('active');
+            setClass('modalSync', 'active', false);
         }
 
         function getEncodedProgress() {
@@ -2291,7 +2429,8 @@
         }
 
         function restoreProgressFromCode() {
-            const raw = document.getElementById('importCodeInput').value.trim();
+            const inp = $('importCodeInput');
+            const raw = inp ? inp.value.trim() : '';
             if (!raw) return alert("Por favor, cole um código válido.");
             try {
                 const decoded = JSON.parse(decodeURIComponent(escape(atob(raw))));
@@ -2354,15 +2493,19 @@
         }
 
         function renderTips() {
-            const list = document.getElementById('tipsList');
+            const list = $('tipsList');
+            if (!list) return;
+
             const filtered = getFilteredTips();
             const totalPages = Math.ceil(filtered.length / T_PER_PAGE) || 1;
             if (tPage > totalPages) tPage = totalPages;
             if (tPage < 1) tPage = 1;
 
-            document.getElementById('pageTIndicator').innerText = `Página ${tPage} de ${totalPages} (${filtered.length} dicas)`;
-            document.getElementById('btnPrevT').disabled = (tPage <= 1);
-            document.getElementById('btnNextT').disabled = (tPage >= totalPages);
+            setText('pageTIndicator', `Página ${tPage} de ${totalPages} (${filtered.length} dicas)`);
+            const prevBtn = $('btnPrevT');
+            if (prevBtn) prevBtn.disabled = (tPage <= 1);
+            const nextBtn = $('btnNextT');
+            if (nextBtn) nextBtn.disabled = (tPage >= totalPages);
 
             const start = (tPage - 1) * T_PER_PAGE;
             const currentSlice = filtered.slice(start, start + T_PER_PAGE);
@@ -2407,7 +2550,8 @@
         }
 
         function handleTipSearch() {
-            tSearch = document.getElementById('tipSearchInput').value;
+            const inp = $('tipSearchInput');
+            tSearch = inp ? inp.value : '';
             tPage = 1;
             renderTips();
         }
@@ -2451,40 +2595,38 @@
             const favCount = Object.values(state.favs).filter(Boolean).length;
             const acc = totalDone > 0 ? Math.round((correct / totalDone) * 100) : 0;
 
-            document.getElementById('topDone').innerText = totalDone;
-            document.getElementById('topCorrect').innerText = correct;
-            document.getElementById('topWrong').innerText = wrong;
-            document.getElementById('topAccuracy').innerText = acc + '%';
+            setText('topDone', totalDone);
+            setText('topCorrect', correct);
+            setText('topWrong', wrong);
+            setText('topAccuracy', acc + '%');
 
-            document.getElementById('sTotalDone').innerText = `${totalDone} / 1000`;
-            document.getElementById('sCorrect').innerText = correct;
-            document.getElementById('sWrong').innerText = wrong;
-            document.getElementById('sFavs').innerText = favCount;
-            document.getElementById('sTodayCount').innerText = todayCount;
+            setText('sTotalDone', `${totalDone} / 1000`);
+            setText('sCorrect', correct);
+            setText('sWrong', wrong);
+            setText('sTodayCount', todayCount);
 
-            const bErr = document.getElementById('badgeErradas');
-            if (bErr) bErr.innerText = wrong;
-            const bAcc = document.getElementById('badgeAcertos');
-            if (bAcc) bAcc.innerText = correct;
-            const bFav = document.getElementById('badgeFavs');
-            if (bFav) bFav.innerText = favCount;
+            setText('badgeErradas', wrong);
+            setText('badgeAcertos', correct);
+            setText('badgeFavs', favCount);
 
             updateDailyGoalUI();
         }
 
         function initTheme() {
-            const btn = document.getElementById('themeBtn');
+            const btn = $('themeBtn');
             const isDark = localStorage.getItem('bq_theme_dark') === 'true';
             if (isDark) {
                 document.body.classList.add('dark-mode');
-                btn.innerText = '☀️';
+                if (btn) btn.innerText = '☀️';
             }
-            btn.addEventListener('click', () => {
-                document.body.classList.toggle('dark-mode');
-                const dark = document.body.classList.contains('dark-mode');
-                btn.innerText = dark ? '☀️' : '🌙';
-                localStorage.setItem('bq_theme_dark', dark);
-            });
+            if (btn) {
+                btn.addEventListener('click', () => {
+                    document.body.classList.toggle('dark-mode');
+                    const dark = document.body.classList.contains('dark-mode');
+                    btn.innerText = dark ? '☀️' : '🌙';
+                    localStorage.setItem('bq_theme_dark', dark);
+                });
+            }
         }
 
         window.addEventListener('DOMContentLoaded', () => {
