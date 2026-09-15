@@ -1092,6 +1092,312 @@
             font-weight: 700;
             cursor: pointer;
         }
+
+        /* ==========================================
+           ESTILO DOS CARDS E TRANSIÇÕES DE PASSAR
+           ========================================== */
+        .view-mode-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+
+        .view-mode-switch {
+            display: flex;
+            background: var(--surface-alt);
+            padding: 4px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            gap: 4px;
+        }
+
+        .btn-view-mode {
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-view-mode.active {
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(29, 78, 216, 0.3);
+        }
+
+        .btn-shuffle {
+            background: var(--primary-light);
+            color: var(--primary);
+            border: 1.5px solid var(--primary);
+            padding: 8px 14px;
+            border-radius: var(--radius-md);
+            font-size: 0.85rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-shuffle:hover, .btn-shuffle:active {
+            transform: scale(1.02);
+            filter: brightness(1.05);
+        }
+
+        .card-deck-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .card-deck-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .card-progress-bar {
+            width: 100%;
+            height: 6px;
+            background: var(--surface-alt);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+        }
+
+        #cardProgressFill {
+            height: 100%;
+            background: linear-gradient(90deg, #1d4ed8, #059669);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .q-card-item {
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.07), 0 4px 6px -2px rgba(0,0,0,0.03);
+            width: 100%;
+            word-break: break-word;
+            position: relative;
+            touch-action: pan-y;
+        }
+
+        .q-card-item.correct {
+            border-left: 6px solid var(--success);
+        }
+
+        .q-card-item.wrong {
+            border-left: 6px solid var(--danger);
+        }
+
+        @keyframes slideInRight {
+            0% { transform: translateX(50px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInLeft {
+            0% { transform: translateX(-50px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        .card-slide-in-right {
+            animation: slideInRight 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .card-slide-in-left {
+            animation: slideInLeft 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .btn-next-card-action {
+            width: 100%;
+            min-height: 54px;
+            background: linear-gradient(135deg, #1d4ed8, #2563eb);
+            color: #ffffff;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 1.05rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            box-shadow: 0 6px 16px rgba(29, 78, 216, 0.35);
+            transition: all 0.2s ease;
+            margin-top: 18px;
+        }
+
+        .btn-next-card-action:hover, .btn-next-card-action:active {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(29, 78, 216, 0.45);
+            filter: brightness(1.06);
+        }
+
+        .card-bottom-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .btn-card-nav {
+            flex: 1;
+            min-height: 48px;
+            padding: 10px 14px;
+            border-radius: var(--radius-md);
+            border: 1.5px solid var(--border);
+            background: var(--surface);
+            color: var(--text-main);
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .btn-card-nav:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .btn-card-nav.btn-card-primary {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        .btn-card-nav.btn-card-rand {
+            background: var(--surface-alt);
+        }
+
+        .swipe-hint-text {
+            text-align: center;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        /* Modo Visitante Banner */
+        .name-banner.guest-active {
+            border-color: #f59e0b;
+            background: #fffbeb;
+            color: #92400e;
+        }
+
+        .dark-mode .name-banner.guest-active {
+            border-color: #d97706;
+            background: #2b1c06;
+            color: #fde68a;
+        }
+
+        .guest-pill-badge {
+            background: #f59e0b;
+            color: #ffffff;
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-left: 6px;
+        }
+
+        .btn-return-camily {
+            background: #059669;
+            color: #ffffff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-return-camily:hover {
+            background: #047857;
+        }
+
+        .guest-warning-bar {
+            background: #fef3c7;
+            border: 1px solid #fde68a;
+            color: #92400e;
+            padding: 10px 14px;
+            border-radius: var(--radius-md);
+            font-size: 0.82rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dark-mode .guest-warning-bar {
+            background: #362208;
+            border-color: #78350f;
+            color: #fef08a;
+        }
+
+        .badge-status-pending {
+            background: var(--surface-alt);
+            color: var(--text-muted);
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+
+        .badge-status-correct {
+            background: var(--success-light);
+            color: var(--success);
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+
+        .badge-status-wrong {
+            background: var(--danger-light);
+            color: var(--danger);
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+
+        .empty-deck-card {
+            background: var(--surface);
+            border: 1.5px dashed var(--border);
+            border-radius: var(--radius-lg);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
     </style>
 </head>
 <body>
@@ -1116,13 +1422,22 @@
     <div class="container">
 
         <!-- Banner com Nome do Estudante e Botão de Troca -->
-        <div class="name-banner">
-            <div>
+        <div class="name-banner" id="nameBanner">
+            <div id="bannerUserText">
                 👋 Estudando como: <span class="name-highlight" id="displayStudentName">Camily</span>
+                <span id="guestBadge" style="display:none;" class="guest-pill-badge">Visitante Temporário</span>
             </div>
-            <button type="button" class="btn-name-switch" onclick="openNameModal()">
-                ✏️ Não é a Camily? Mudar nome
-            </button>
+            <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                <button type="button" class="btn-name-switch" id="btnSwitchUser" onclick="openNameModal()">
+                    👤 Não é a Camily? Treinar temporariamente
+                </button>
+                <button type="button" class="btn-return-camily" id="btnReturnCamily" style="display:none;" onclick="exitGuestMode()">
+                    ↩️ Voltar para Camily
+                </button>
+            </div>
+        </div>
+        <div id="guestWarningBar" style="display:none;" class="guest-warning-bar">
+            ⚠️ <strong>Modo Visitante Ativo:</strong> As questões resolvidas nesta sessão são temporárias e não alteram o histórico oficial da <strong>Camily</strong>.
         </div>
 
         <!-- ABA 1: DASHBOARD -->
@@ -1252,25 +1567,96 @@
         <!-- ABA 2: BANCO DE 1000 QUESTÕES -->
         <div id="panel-questoes" class="tab-panel">
             <div class="controls-card">
+                <!-- Modo de Visualização & Ordem Aleatória -->
+                <div class="view-mode-bar">
+                    <div class="view-mode-switch">
+                        <button type="button" id="btnModeCard" class="btn-view-mode active" onclick="setViewMode('card')">
+                            🎴 Modo Cards (Passar Questões)
+                        </button>
+                        <button type="button" id="btnModeList" class="btn-view-mode" onclick="setViewMode('list')">
+                            📋 Modo Lista
+                        </button>
+                    </div>
+                    <button type="button" class="btn-shuffle" onclick="shuffleDeck()" title="Embaralhar todas as questões">
+                        <span>🔀</span> Modo Aleatório (Re-embaralhar)
+                    </button>
+                </div>
+
+                <!-- Campo de Busca -->
                 <input type="text" id="qSearchInput" class="search-input" placeholder="🔍 Buscar por palavra-chave ou nº da questão..." oninput="handleSearch()">
-                <div class="pills-bar" id="matFilters">
-                    <button type="button" class="pill-btn active" onclick="setFilter('Todas')">Todas (1000)</button>
-                    <button type="button" class="pill-btn pill-erradas" onclick="setFilter('Erradas')">❌ Erradas <span class="pill-badge" id="badgeErradas">0</span></button>
-                    <button type="button" class="pill-btn pill-acertos" onclick="setFilter('Acertos')">✅ Acertos <span class="pill-badge" id="badgeAcertos">0</span></button>
-                    <button type="button" class="pill-btn" onclick="setFilter('Favoritas')">⭐ Favoritas <span class="pill-badge" id="badgeFavs">0</span></button>
-                    <button type="button" class="pill-btn" onclick="setFilter('Português')">Português (250)</button>
-                    <button type="button" class="pill-btn" onclick="setFilter('Matemática')">Matemática (250)</button>
-                    <button type="button" class="pill-btn" onclick="setFilter('Ciências da Natureza')">Ciências (250)</button>
-                    <button type="button" class="pill-btn" onclick="setFilter('História e Geografia')">Humanas (250)</button>
+                
+                <!-- Filtros de Status (Não Respondidas Padrão!) -->
+                <div style="font-size:0.75rem; font-weight:800; color:var(--text-muted); text-transform:uppercase; margin:8px 0 4px 2px;">Status da Questão:</div>
+                <div class="pills-bar" id="statusFilters">
+                    <button type="button" class="pill-btn active" id="filterPillNaoResp" onclick="setStatusFilter('nao_respondidas')">
+                        ⭕ Não respondidas <span class="pill-badge" id="badgeNaoRespondidas">0</span>
+                    </button>
+                    <button type="button" class="pill-btn" id="filterPillResp" onclick="setStatusFilter('respondidas')">
+                        📝 Respondidas <span class="pill-badge" id="badgeRespondidas">0</span>
+                    </button>
+                    <button type="button" class="pill-btn pill-acertos" id="filterPillAcertos" onclick="setStatusFilter('acertos')">
+                        ✅ Acertos <span class="pill-badge" id="badgeAcertos">0</span>
+                    </button>
+                    <button type="button" class="pill-btn pill-erradas" id="filterPillErradas" onclick="setStatusFilter('erradas')">
+                        ❌ Erradas <span class="pill-badge" id="badgeErradas">0</span>
+                    </button>
+                    <button type="button" class="pill-btn" id="filterPillFavs" onclick="setStatusFilter('favoritas')">
+                        ⭐ Favoritas <span class="pill-badge" id="badgeFavs">0</span>
+                    </button>
+                    <button type="button" class="pill-btn" id="filterPillTodas" onclick="setStatusFilter('todas')">
+                        📚 Todas <span class="pill-badge" id="badgeTodas">1000</span>
+                    </button>
+                </div>
+
+                <!-- Filtros de Disciplina -->
+                <div style="font-size:0.75rem; font-weight:800; color:var(--text-muted); text-transform:uppercase; margin:10px 0 4px 2px;">Filtrar por Matéria:</div>
+                <div class="pills-bar" id="subjectFilterRow">
+                    <button type="button" class="pill-btn active" onclick="setSubjectFilter('Todas')">Todas Matérias</button>
+                    <button type="button" class="pill-btn" onclick="setSubjectFilter('Português')">Português (250)</button>
+                    <button type="button" class="pill-btn" onclick="setSubjectFilter('Matemática')">Matemática (250)</button>
+                    <button type="button" class="pill-btn" onclick="setSubjectFilter('Ciências da Natureza')">Ciências (250)</button>
+                    <button type="button" class="pill-btn" onclick="setSubjectFilter('História e Geografia')">Humanas (250)</button>
                 </div>
             </div>
 
-            <div id="questionsList"></div>
+            <!-- CONTAINER DO MODO CARD (FLASHCARD / PASSAR PRO LADO) -->
+            <div id="cardViewContainer" class="card-deck-wrapper">
+                <div class="card-deck-header">
+                    <span id="cardDeckInfo">Questão 1 de 1000 (⭕ Não respondidas)</span>
+                    <span style="font-size:0.8rem; color:var(--primary); font-weight:800;">🔀 Modo Aleatório Ativo</span>
+                </div>
+                <div class="card-progress-bar">
+                    <div id="cardProgressFill"></div>
+                </div>
 
-            <div class="pagination-row">
-                <button type="button" class="btn-page" id="btnPrevQ" onclick="prevQPage()">⬅️ Anteriores</button>
-                <span id="pageQIndicator" style="font-weight: 700; font-size: 0.85rem; color: var(--text-muted);">Página 1</span>
-                <button type="button" class="btn-page" id="btnNextQ" onclick="nextQPage()">Próximas ➡️</button>
+                <!-- Card Ativo Renderizado Dinamicamente -->
+                <div id="activeCardWrapper"></div>
+
+                <!-- Barra Inferior de Navegação do Card -->
+                <div class="card-bottom-nav">
+                    <button type="button" class="btn-card-nav" id="btnCardPrev" onclick="prevCard('left')">
+                        ⬅️ Anterior
+                    </button>
+                    <button type="button" class="btn-card-nav btn-card-rand" onclick="randomJumpCard()" title="Pular para outra aleatória">
+                        🔀 Pular Aleatória
+                    </button>
+                    <button type="button" class="btn-card-nav btn-card-primary" id="btnCardNext" onclick="nextCard('right')">
+                        Próxima ➡️
+                    </button>
+                </div>
+                <div class="swipe-hint-text">
+                    👆 <strong>Dica de Uso:</strong> No celular, arraste o card para o lado (swipe) ou use as setas do teclado para avançar!
+                </div>
+            </div>
+
+            <!-- CONTAINER DO MODO LISTA (15 POR PÁGINA) -->
+            <div id="listViewContainer" style="display:none;">
+                <div id="questionsList"></div>
+                <div class="pagination-row">
+                    <button type="button" class="btn-page" id="btnPrevQ" onclick="prevQPage()">⬅️ Anteriores</button>
+                    <span id="pageQIndicator" style="font-weight: 700; font-size: 0.85rem; color: var(--text-muted);">Página 1</span>
+                    <button type="button" class="btn-page" id="btnNextQ" onclick="nextQPage()">Próximas ➡️</button>
+                </div>
             </div>
         </div>
 
@@ -1378,15 +1764,15 @@
     <!-- MODAL: NÃO É A CAMILY? TROCAR NOME -->
     <div class="modal-overlay" id="modalName">
         <div class="modal-card">
-            <div class="modal-emoji">👋✏️</div>
-            <h3 class="modal-title">Quem está estudando agora?</h3>
-            <p class="modal-msg">Insira seu nome para personalizar as metas, celebrações e o histórico com o seu perfil!</p>
-            <input type="text" id="userNameInput" class="search-input" style="font-size:1.1rem; text-align:center;" placeholder="Seu nome aqui..." onkeydown="if(event.key==='Enter') saveNewUserName()">
-            <button type="button" class="modal-btn-primary" onclick="saveNewUserName()">
-                Salvar Meu Nome
+            <div class="modal-emoji">👤✏️</div>
+            <h3 class="modal-title">Treino Temporário / Visitante</h3>
+            <p class="modal-msg">Digite seu nome para testar ou estudar agora. <strong>Apenas o perfil oficial da Camily salva permanentemente as respostas, metas e evolução neste aparelho.</strong> Ao sair ou atualizar a página, o simulador volta automaticamente para a Camily!</p>
+            <input type="text" id="userNameInput" class="search-input" style="font-size:1.1rem; text-align:center;" placeholder="Seu nome (ex: Vagner, Convidado)..." onkeydown="if(event.key==='Enter') saveGuestUserName()">
+            <button type="button" class="modal-btn-primary" onclick="saveGuestUserName()">
+                Iniciar Treino Temporário
             </button>
             <button type="button" class="modal-btn-secondary" onclick="closeNameModal()">
-                Cancelar
+                Cancelar / Continuar como Camily
             </button>
         </div>
     </div>
@@ -1705,6 +2091,9 @@
         // ESTADO GLOBAL COM META DIÁRIA
         let state = {
             userName: "Camily",
+            isGuest: false,
+            guestName: "",
+            guestAnswers: {},
             dailyGoal: 20,
             answers: {},
             favs: {},
@@ -1712,8 +2101,42 @@
             celebratedMilestones: []
         };
 
+        /* Modo de visualização e filtros */
+        let viewMode = 'card'; // 'card' (padrão) ou 'list'
+        let statusFilter = 'nao_respondidas'; // 'nao_respondidas' por padrão (não respondidas primeiro!)
+        let subjectFilter = 'Todas';
+        let qSearch = '';
+        let qPage = 1;
+        const Q_PER_PAGE = 15;
+
+        /* Baralho Aleatório */
+        let randomizedQuestions = [];
+        let currentCardIndex = 0;
+        let currentDirection = 'right';
+
+        function shuffleArray(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function initRandomDeck() {
+            randomizedQuestions = shuffleArray(DB_QUESTIONS);
+            currentCardIndex = 0;
+        }
+
+        function shuffleDeck() {
+            randomizedQuestions = shuffleArray(DB_QUESTIONS);
+            currentCardIndex = 0;
+            renderQuestions();
+        }
+
         function getAnsObj(qId) {
-            const a = state.answers[qId];
+            const source = state.isGuest ? state.guestAnswers : state.answers;
+            const a = source[qId];
             if (!a) return null;
             if (typeof a === 'number') {
                 const q = DB_QUESTIONS.find(item => item.id == qId);
@@ -1730,32 +2153,78 @@
         function loadStorage() {
             try {
                 const s = localStorage.getItem('bq_camily_v5');
-                if (s) state = JSON.parse(s);
+                if (s) {
+                    const parsed = JSON.parse(s);
+                    state.answers = parsed.answers || {};
+                    state.favs = parsed.favs || {};
+                    state.dailyGoal = parsed.dailyGoal || 20;
+                    state.consecutiveErrors = parsed.consecutiveErrors || 0;
+                    state.celebratedMilestones = parsed.celebratedMilestones || [];
+                }
             } catch(e) {}
             
+            // Sempre volta para a Camily ao carregar/recarregar a página!
+            state.userName = "Camily";
+            state.isGuest = false;
+            state.guestName = "";
+            state.guestAnswers = {};
+
             if (!state.dailyGoal) state.dailyGoal = 20;
             checkUrlSync();
         }
 
         function saveStorage() {
-            try {
-                localStorage.setItem('bq_camily_v5', JSON.stringify(state));
-            } catch(e) {}
+            // Apenas salva permanentemente se for o perfil oficial da Camily!
+            if (!state.isGuest) {
+                try {
+                    const camilyData = {
+                        userName: "Camily",
+                        dailyGoal: state.dailyGoal || 20,
+                        answers: state.answers,
+                        favs: state.favs,
+                        consecutiveErrors: state.consecutiveErrors || 0,
+                        celebratedMilestones: state.celebratedMilestones || []
+                    };
+                    localStorage.setItem('bq_camily_v5', JSON.stringify(camilyData));
+                } catch(e) {}
+            }
             updateStatsUI();
             updateNameUI();
             updateDailyGoalUI();
         }
 
         function updateNameUI() {
-            const name = state.userName || "Camily";
+            const isGuest = !!state.isGuest;
+            const name = isGuest ? (state.guestName || "Visitante") : "Camily";
+
             setText('displayStudentName', name);
             setText('headerTitle', `${name} • Bento Quirino`);
             setText('heroTitle', `${name} Rumo à Vaga no Bento Quirino! 🚀`);
+
+            const banner = $('nameBanner');
+            const badge = $('guestBadge');
+            const btnSwitch = $('btnSwitchUser');
+            const btnReturn = $('btnReturnCamily');
+            const warningBar = $('guestWarningBar');
+
+            if (isGuest) {
+                if (banner) banner.classList.add('guest-active');
+                if (badge) badge.style.display = 'inline-block';
+                if (btnSwitch) btnSwitch.innerText = '✏️ Trocar Visitante';
+                if (btnReturn) btnReturn.style.display = 'inline-flex';
+                if (warningBar) warningBar.style.display = 'flex';
+            } else {
+                if (banner) banner.classList.remove('guest-active');
+                if (badge) badge.style.display = 'none';
+                if (btnSwitch) btnSwitch.innerText = '👤 Não é a Camily? Treinar temporariamente';
+                if (btnReturn) btnReturn.style.display = 'none';
+                if (warningBar) warningBar.style.display = 'none';
+            }
         }
 
-        /* Modal Trocar Nome */
+        /* Modal Trocar Nome / Visitante Temporário */
         function openNameModal() {
-            setVal('userNameInput', state.userName || "Camily");
+            setVal('userNameInput', state.isGuest ? state.guestName : '');
             setClass('modalName', 'active', true);
             setTimeout(() => {
                 const inp = $('userNameInput');
@@ -1767,14 +2236,32 @@
             setClass('modalName', 'active', false);
         }
 
-        function saveNewUserName() {
+        function saveGuestUserName() {
             const inp = $('userNameInput');
             const val = inp ? inp.value.trim() : '';
             if (val) {
+                state.isGuest = true;
+                state.guestName = val;
                 state.userName = val;
-                saveStorage();
+                state.guestAnswers = {}; // Treino temporário separado
+                updateNameUI();
+                updateStatsUI();
+                renderQuestions();
+                updateDailyGoalUI();
             }
             closeNameModal();
+        }
+
+        function exitGuestMode() {
+            state.isGuest = false;
+            state.guestName = "";
+            state.guestAnswers = {};
+            state.userName = "Camily";
+            loadStorage();
+            updateNameUI();
+            updateStatsUI();
+            renderQuestions();
+            updateDailyGoalUI();
         }
 
         /* ==========================================
@@ -1817,7 +2304,8 @@
             let todayCount = 0;
             let todayCorrect = 0;
 
-            Object.keys(state.answers).forEach(id => {
+            const sourceAnswers = state.isGuest ? state.guestAnswers : state.answers;
+            Object.keys(sourceAnswers).forEach(id => {
                 const a = getAnsObj(id);
                 if (a && a.dateStr === todayStr) {
                     todayCount++;
@@ -1874,7 +2362,10 @@
 
             const navs = document.querySelectorAll('.nav-touch-item');
             if (id === 'dash') if (navs[0]) navs[0].classList.add('active');
-            if (id === 'questoes') if (navs[1]) navs[1].classList.add('active');
+            if (id === 'questoes') {
+                if (navs[1]) navs[1].classList.add('active');
+                renderQuestions();
+            }
             if (id === 'historico') {
                 if (navs[2]) navs[2].classList.add('active');
                 populateHistoryDates();
@@ -1887,36 +2378,436 @@
 
         function openFilteredQuestions(filterType) {
             showTab('questoes');
-            setFilter(filterType);
+            if (filterType === 'Todas') {
+                setStatusFilter('todas');
+            } else if (filterType === 'Acertos') {
+                setStatusFilter('acertos');
+            } else if (filterType === 'Erradas') {
+                setStatusFilter('erradas');
+            } else if (filterType === 'nao_respondidas') {
+                setStatusFilter('nao_respondidas');
+            } else {
+                setStatusFilter(filterType);
+            }
         }
 
-        /* Questões */
-        let qFilter = 'Todas';
-        let qSearch = '';
-        let qPage = 1;
-        const Q_PER_PAGE = 15;
+        /* ==========================================
+           CONTROLE DE FILTROS E MODO CARDS
+           ========================================== */
+        function setViewMode(mode) {
+            viewMode = mode;
+            const btnCard = $('btnModeCard');
+            const btnList = $('btnModeList');
+            const cardContainer = $('cardViewContainer');
+            const listContainer = $('listViewContainer');
+
+            if (mode === 'card') {
+                if (btnCard) btnCard.classList.add('active');
+                if (btnList) btnList.classList.remove('active');
+                if (cardContainer) cardContainer.style.display = 'block';
+                if (listContainer) listContainer.style.display = 'none';
+            } else {
+                if (btnCard) btnCard.classList.remove('active');
+                if (btnList) btnList.classList.add('active');
+                if (cardContainer) cardContainer.style.display = 'none';
+                if (listContainer) listContainer.style.display = 'block';
+            }
+            renderQuestions();
+        }
+
+        
+        /* Compatibilidade com chamadas antigas */
+        function setFilter(arg) {
+            if (arg === 'Todas') setStatusFilter('todas');
+            else if (arg === 'Erradas') setStatusFilter('erradas');
+            else if (arg === 'Acertos') setStatusFilter('acertos');
+            else if (arg === 'Favoritas') setStatusFilter('favoritas');
+            else setSubjectFilter(arg);
+        }
+        function saveNewUserName() { saveGuestUserName(); }
+function setStatusFilter(status) {
+            statusFilter = status;
+            currentCardIndex = 0;
+            qPage = 1;
+
+            const pillMap = {
+                'nao_respondidas': 'filterPillNaoResp',
+                'respondidas': 'filterPillResp',
+                'acertos': 'filterPillAcertos',
+                'erradas': 'filterPillErradas',
+                'favoritas': 'filterPillFavs',
+                'todas': 'filterPillTodas'
+            };
+
+            Object.keys(pillMap).forEach(key => {
+                const el = $(pillMap[key]);
+                if (el) el.classList.toggle('active', key === status);
+            });
+
+            renderQuestions();
+        }
+
+        function setSubjectFilter(subject) {
+            subjectFilter = subject;
+            currentCardIndex = 0;
+            qPage = 1;
+
+            document.querySelectorAll('#subjectFilterRow .pill-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.innerText.includes(subject) || (subject === 'Todas' && btn.innerText.includes('Todas Matérias'))) {
+                    btn.classList.add('active');
+                }
+            });
+
+            renderQuestions();
+        }
+
+        function handleSearch() {
+            const inp = $('qSearchInput');
+            qSearch = inp ? inp.value.trim() : '';
+            currentCardIndex = 0;
+            qPage = 1;
+            renderQuestions();
+        }
 
         function getFilteredQuestions() {
-            return DB_QUESTIONS.filter(q => {
+            if (!randomizedQuestions || randomizedQuestions.length === 0) {
+                randomizedQuestions = shuffleArray(DB_QUESTIONS);
+            }
+
+            return randomizedQuestions.filter(q => {
                 const a = getAnsObj(q.id);
                 const isAns = !!a;
                 const isRight = isAns && a.isCorrect;
 
-                if (qFilter === 'Favoritas' && !state.favs[q.id]) return false;
-                if (qFilter === 'Erradas' && (!isAns || isRight)) return false;
-                if (qFilter === 'Acertos' && (!isAns || !isRight)) return false;
-                if (qFilter !== 'Todas' && qFilter !== 'Favoritas' && qFilter !== 'Erradas' && qFilter !== 'Acertos' && q.materia !== qFilter) return false;
-                
+                // Filtro de Status
+                if (statusFilter === 'nao_respondidas' && isAns) return false;
+                if (statusFilter === 'respondidas' && !isAns) return false;
+                if (statusFilter === 'acertos' && (!isAns || !isRight)) return false;
+                if (statusFilter === 'erradas' && (!isAns || isRight)) return false;
+                if (statusFilter === 'favoritas' && !state.favs[q.id]) return false;
+
+                // Filtro de Matéria
+                if (subjectFilter !== 'Todas' && q.materia !== subjectFilter) return false;
+
+                // Busca por texto
                 if (qSearch) {
                     const s = qSearch.toLowerCase();
                     const matchText = (q.enunciado + ' ' + q.tema + ' ' + q.id).toLowerCase();
                     if (!matchText.includes(s)) return false;
                 }
+
                 return true;
             });
         }
 
         function renderQuestions() {
+            updateFilterBadges();
+            if (viewMode === 'card') {
+                renderCard();
+            } else {
+                renderList();
+            }
+        }
+
+        function updateFilterBadges() {
+            let totalUnanswered = 0;
+            let totalAnswered = 0;
+            let totalCorrect = 0;
+            let totalWrong = 0;
+            let totalFavs = 0;
+
+            DB_QUESTIONS.forEach(q => {
+                const a = getAnsObj(q.id);
+                if (a) {
+                    totalAnswered++;
+                    if (a.isCorrect) totalCorrect++;
+                    else totalWrong++;
+                } else {
+                    totalUnanswered++;
+                }
+                if (state.favs[q.id]) totalFavs++;
+            });
+
+            setText('badgeNaoRespondidas', totalUnanswered);
+            setText('badgeRespondidas', totalAnswered);
+            setText('badgeAcertos', totalCorrect);
+            setText('badgeErradas', totalWrong);
+            setText('badgeFavs', totalFavs);
+            setText('badgeTodas', DB_QUESTIONS.length);
+        }
+
+        /* ==========================================
+           RENDERIZAÇÃO DO MODO CARD (FLASHCARD)
+           ========================================== */
+        function renderCard() {
+            const wrapper = $('activeCardWrapper');
+            if (!wrapper) return;
+
+            const filtered = getFilteredQuestions();
+            const total = filtered.length;
+
+            if (total === 0) {
+                let statusLabel = 'para este filtro';
+                if (statusFilter === 'nao_respondidas') statusLabel = 'não respondidas! 🎉 Você completou todas as questões desta matéria';
+                if (statusFilter === 'erradas') statusLabel = 'erradas registradas! Parabéns!';
+
+                wrapper.innerHTML = `
+                    <div class="empty-deck-card">
+                        <div style="font-size: 3rem; margin-bottom: 12px;">🏆✨</div>
+                        <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 8px;">Nenhuma questão encontrada!</h3>
+                        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5;">
+                            Não há questões ${statusLabel}. Escolha outro filtro abaixo para continuar estudando:
+                        </p>
+                        <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+                            <button type="button" class="pill-btn pill-acertos" onclick="setStatusFilter('acertos')">Ver Acertos</button>
+                            <button type="button" class="pill-btn pill-erradas" onclick="setStatusFilter('erradas')">Revisar Erros</button>
+                            <button type="button" class="pill-btn" onclick="setStatusFilter('todas')">Ver Todas (1000)</button>
+                            <button type="button" class="pill-btn active" onclick="shuffleDeck()">🔀 Re-embaralhar</button>
+                        </div>
+                    </div>
+                `;
+
+                setText('cardDeckInfo', `0 questões encontradas`);
+                const fill = $('cardProgressFill');
+                if (fill) fill.style.width = '100%';
+                const prev = $('btnCardPrev');
+                if (prev) prev.disabled = true;
+                const next = $('btnCardNext');
+                if (next) next.disabled = true;
+                return;
+            }
+
+            if (currentCardIndex >= total) currentCardIndex = total - 1;
+            if (currentCardIndex < 0) currentCardIndex = 0;
+
+            const q = filtered[currentCardIndex];
+            const a = getAnsObj(q.id);
+            const isAns = !!a;
+            const userChoice = isAns ? a.choice : -1;
+            const isRight = isAns && a.isCorrect;
+            const isFav = !!state.favs[q.id];
+
+            // Informações do Deck
+            let filterName = 'Todas';
+            if (statusFilter === 'nao_respondidas') filterName = '⭕ Não respondidas';
+            if (statusFilter === 'respondidas') filterName = '📝 Respondidas';
+            if (statusFilter === 'acertos') filterName = '✅ Acertos';
+            if (statusFilter === 'erradas') filterName = '❌ Erradas';
+            if (statusFilter === 'favoritas') filterName = '⭐ Favoritas';
+
+            setText('cardDeckInfo', `Questão ${currentCardIndex + 1} de ${total} (${filterName})`);
+            const progressPct = Math.round(((currentCardIndex + 1) / total) * 100);
+            const fill = $('cardProgressFill');
+            if (fill) fill.style.width = progressPct + '%';
+
+            const prev = $('btnCardPrev');
+            if (prev) prev.disabled = (currentCardIndex <= 0);
+            const next = $('btnCardNext');
+            if (next) next.disabled = (currentCardIndex >= total - 1 && statusFilter !== 'nao_respondidas');
+
+            let cardStatusBadge = `<span class="badge-status-pending">⭕ Não respondida</span>`;
+            if (isAns) {
+                cardStatusBadge = isRight 
+                    ? `<span class="badge-status-correct">✅ Acertou</span>` 
+                    : `<span class="badge-status-wrong">❌ Errou</span>`;
+            }
+
+            let cardClass = 'q-card-item';
+            if (isAns) cardClass += isRight ? ' correct' : ' wrong';
+            cardClass += currentDirection === 'left' ? ' card-slide-in-left' : ' card-slide-in-right';
+
+            let optsHtml = '';
+            q.opcoes.forEach((opt, idx) => {
+                let btnClass = 'opt-btn';
+                const letter = String.fromCharCode(65 + idx);
+                const optClean = opt.replace(/^[A-E]\)\s*/, '');
+
+                if (isAns) {
+                    if (idx === q.correta) btnClass += ' is-correct';
+                    if (idx === userChoice && idx !== q.correta) btnClass += ' is-wrong';
+                }
+
+                optsHtml += `
+                    <button type="button" class="${btnClass}" onclick="handleAnswer(${q.id}, ${idx})">
+                        <span class="opt-char">${letter}</span>
+                        <span>${optClean}</span>
+                    </button>
+                `;
+            });
+
+            let fbHtml = '';
+            if (isAns) {
+                const chosenLetter = String.fromCharCode(65 + userChoice);
+                const chosenText = q.opcoes[userChoice] ? q.opcoes[userChoice].replace(/^[A-E]\)\s*/, '') : '';
+                const correctLetter = String.fromCharCode(65 + q.correta);
+                const correctText = q.opcoes[q.correta] ? q.opcoes[q.correta].replace(/^[A-E]\)\s*/, '') : '';
+
+                let diagHtml = '';
+                if (q.svg_type) {
+                    diagHtml = `
+                        <div class="illustration-wrap">
+                            <div class="illustration-title">📐 Desenho Explicativo da Questão</div>
+                            ${getSvgIllustration(q.svg_type)}
+                        </div>
+                    `;
+                }
+
+                fbHtml = `
+                    <div class="feedback-box ${isRight ? 'correct' : 'wrong'}">
+                        <div class="feedback-title">
+                            ${isRight ? '🌟 Excelente, você acertou!' : '⚠️ Atenção: você marcou a alternativa incorreta'}
+                        </div>
+                        
+                        ${!isRight ? `
+                        <div class="error-analysis">
+                            <strong>Onde esteve o equívoco:</strong> Você marcou a <strong>Alternativa ${chosenLetter}</strong> ("${chosenText}"). Esta opção induz ao erro comum do vestibulinho.<br><br>
+                            <strong>A resposta correta é a Alternativa ${correctLetter}</strong> ("${correctText}").
+                        </div>
+                        ` : ''}
+
+                        <div class="fb-step">
+                            <strong>Explicação Completa da Questão:</strong><br>
+                            ${q.comentario}
+                        </div>
+
+                        ${diagHtml}
+
+                        <div class="fb-dica">
+                            💡 <strong>Bizu de Ouro do Bento Quirino:</strong> ${q.dica}
+                        </div>
+
+                        <!-- BOTÃO DE DESTAQUE PARA PASSAR DE QUESTÃO -->
+                        <button type="button" class="btn-next-card-action" onclick="nextCard('right')">
+                            <span>Próxima Questão (Passar para o lado) ➡️</span>
+                        </button>
+                    </div>
+                `;
+            }
+
+            wrapper.innerHTML = `
+                <div class="${cardClass}" id="currentQuestionCard">
+                    <div class="q-header">
+                        <div class="q-badge-box">
+                            <span class="tag-mat">${q.materia}</span>
+                            <span class="tag-tema">${q.tema}</span>
+                            <span class="tag-qid">Questão #${q.id}</span>
+                            ${cardStatusBadge}
+                        </div>
+                        <button type="button" class="fav-touch-btn" onclick="toggleFav(${q.id})" title="Favoritar questão">
+                            ${isFav ? '⭐' : '☆'}
+                        </button>
+                    </div>
+
+                    <div class="q-enunciado">${q.enunciado.replace(/\n/g, '<br>')}</div>
+
+                    <div class="q-options">
+                        ${optsHtml}
+                    </div>
+
+                    ${fbHtml}
+                </div>
+            `;
+
+            // Ativa suporte a gesto touch de arrastar (swipe) para passar para o lado no celular
+            attachSwipeGesture($('currentQuestionCard'));
+        }
+
+        /* Gestos de Swipe para celular */
+        function attachSwipeGesture(cardEl) {
+            if (!cardEl) return;
+            let startX = 0;
+            let startY = 0;
+            let endX = 0;
+            let endY = 0;
+
+            cardEl.addEventListener('touchstart', (e) => {
+                if (e.touches && e.touches.length > 0) {
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                    endX = startX;
+                    endY = startY;
+                }
+            }, { passive: true });
+
+            cardEl.addEventListener('touchmove', (e) => {
+                if (e.touches && e.touches.length > 0) {
+                    endX = e.touches[0].clientX;
+                    endY = e.touches[0].clientY;
+                }
+            }, { passive: true });
+
+            cardEl.addEventListener('touchend', () => {
+                const diffX = endX - startX;
+                const diffY = endY - startY;
+                // Se arrastou na horizontal com mais de 45px
+                if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 45) {
+                    if (diffX < 0) {
+                        // Arrastou para a esquerda -> Próxima questão
+                        nextCard('right');
+                    } else {
+                        // Arrastou para a direita -> Questão anterior
+                        prevCard('left');
+                    }
+                }
+            }, { passive: true });
+        }
+
+        function nextCard(dir) {
+            currentDirection = dir || 'right';
+            const filtered = getFilteredQuestions();
+            if (filtered.length === 0) {
+                renderCard();
+                return;
+            }
+
+            if (statusFilter === 'nao_respondidas') {
+                // Ao avançar, a questão respondida já saiu do deck de não respondidas!
+                // Então o currentCardIndex já aponta para a próxima questão do topo!
+                if (currentCardIndex >= filtered.length) {
+                    currentCardIndex = Math.max(0, filtered.length - 1);
+                }
+            } else {
+                if (currentCardIndex < filtered.length - 1) {
+                    currentCardIndex++;
+                } else {
+                    currentCardIndex = 0;
+                }
+            }
+            renderCard();
+            window.scrollTo({ top: 160, behavior: 'smooth' });
+        }
+
+        function prevCard(dir) {
+            currentDirection = dir || 'left';
+            const filtered = getFilteredQuestions();
+            if (filtered.length === 0) {
+                renderCard();
+                return;
+            }
+
+            if (currentCardIndex > 0) {
+                currentCardIndex--;
+            }
+            renderCard();
+            window.scrollTo({ top: 160, behavior: 'smooth' });
+        }
+
+        function randomJumpCard() {
+            const filtered = getFilteredQuestions();
+            if (filtered.length > 1) {
+                let nextIdx = Math.floor(Math.random() * filtered.length);
+                if (nextIdx === currentCardIndex) nextIdx = (nextIdx + 1) % filtered.length;
+                currentCardIndex = nextIdx;
+                currentDirection = 'right';
+                renderCard();
+            }
+        }
+
+        /* ==========================================
+           RENDERIZAÇÃO DO MODO LISTA (15 POR PÁGINA)
+           ========================================== */
+        function renderList() {
             const list = $('questionsList');
             if (!list) return;
 
@@ -1925,11 +2816,12 @@
             if (qPage > totalPages) qPage = totalPages;
             if (qPage < 1) qPage = 1;
 
-            let filterLabel = qFilter;
-            if (qFilter === 'Erradas') filterLabel = '❌ Questões Erradas';
-            if (qFilter === 'Acertos') filterLabel = '✅ Questões Acertadas';
+            let filterLabel = statusFilter;
+            if (statusFilter === 'nao_respondidas') filterLabel = '⭕ Não respondidas';
+            if (statusFilter === 'erradas') filterLabel = '❌ Questões Erradas';
+            if (statusFilter === 'acertos') filterLabel = '✅ Questões Acertadas';
 
-            setText('pageQIndicator', `Página ${qPage} de ${totalPages} (${filtered.length} em ${filterLabel})`);
+            setText('pageQIndicator', `Página ${qPage} de ${totalPages} (${filtered.length} questões)`);
             const prevBtn = $('btnPrevQ');
             if (prevBtn) prevBtn.disabled = (qPage <= 1);
             const nextBtn = $('btnNextQ');
@@ -1939,10 +2831,7 @@
             const currentSlice = filtered.slice(start, start + Q_PER_PAGE);
 
             if (currentSlice.length === 0) {
-                let emptyMsg = "Nenhuma questão encontrada para este filtro.";
-                if (qFilter === 'Erradas') emptyMsg = "🎉 Parabéns! Você não tem questões erradas registradas neste momento.";
-                if (qFilter === 'Acertos') emptyMsg = "Você ainda não acertou questões neste filtro. Comece a responder para ver seus acertos aqui!";
-                list.innerHTML = `<div style="text-align:center; padding: 40px 20px; color: var(--text-muted); font-weight: 700; line-height: 1.5;">${emptyMsg}</div>`;
+                list.innerHTML = `<div style="text-align:center; padding: 40px 20px; color: var(--text-muted); font-weight: 700; line-height: 1.5;">Nenhuma questão encontrada para este filtro.</div>`;
                 return;
             }
 
@@ -1981,72 +2870,61 @@
                     const chosenLetter = String.fromCharCode(65 + userChoice);
                     const chosenText = q.opcoes[userChoice] ? q.opcoes[userChoice].replace(/^[A-E]\)\s*/, '') : '';
                     const correctLetter = String.fromCharCode(65 + q.correta);
-                    const correctText = q.opcoes[q.correta].replace(/^[A-E]\)\s*/, '');
-                    const svgMarkup = getSvgIllustration(q.svg_type);
+                    const correctText = q.opcoes[q.correta] ? q.opcoes[q.correta].replace(/^[A-E]\)\s*/, '') : '';
 
-                    if (isRight) {
-                        fbHtml = `
-                            <div class="fb-box correct">
-                                <strong>🎉 Muito bem, ${state.userName || 'Camily'}! Resposta Certa! (+10 pts) (Gabarito: Letra ${correctLetter})</strong>
-                                
-                                <div class="correct-explanation-box">
-                                    <strong>✅ Por que a Letra ${correctLetter} está certa:</strong><br>
-                                    ${q.comentario}
-                                </div>
-
-                                <div class="illustration-wrap">
-                                    <div class="illustration-title">📐 Desenho Explicativo do Conceito</div>
-                                    ${svgMarkup}
-                                </div>
-
-                                <div class="bizu-badge">
-                                    <span>⚡</span>
-                                    <div><strong>Bizu de Prova:</strong> ${q.dica}</div>
-                                </div>
-                            </div>
-                        `;
-                    } else {
-                        fbHtml = `
-                            <div class="fb-box wrong">
-                                <strong>❌ Atenção ao Erro na Questão (Gabarito Oficial: Letra ${correctLetter})</strong>
-                                
-                                <div class="err-analysis-box">
-                                    <strong>🔍 O que você marcou:</strong> Letra ${chosenLetter} (<em>"${chosenText}"</em>)<br>
-                                    <strong>⚠️ Por que esta alternativa está INCORRETA:</strong> Esta opção confunde conceitos fundamentais da matéria. Analise a correta abaixo com o desenho explicativo para fixar o aprendizado.
-                                </div>
-
-                                <div class="correct-explanation-box">
-                                    <strong>✅ Alternativa Correta: Letra ${correctLetter} (<em>"${correctText}"</em>)</strong><br>
-                                    <strong>💡 Resolução Passo a Passo:</strong> ${q.comentario}
-                                </div>
-
-                                <div class="illustration-wrap">
-                                    <div class="illustration-title">📐 Desenho Explicativo do Conceito</div>
-                                    ${svgMarkup}
-                                </div>
-
-                                <div class="bizu-badge">
-                                    <span>⚡</span>
-                                    <div><strong>Bizu de Ouro:</strong> ${q.dica}</div>
-                                </div>
+                    let diagHtml = '';
+                    if (q.svg_type) {
+                        diagHtml = `
+                            <div class="illustration-wrap">
+                                <div class="illustration-title">📐 Desenho Explicativo da Questão</div>
+                                ${getSvgIllustration(q.svg_type)}
                             </div>
                         `;
                     }
+
+                    fbHtml = `
+                        <div class="feedback-box ${isRight ? 'correct' : 'wrong'}">
+                            <div class="feedback-title">
+                                ${isRight ? '🌟 Excelente, você acertou!' : '⚠️ Atenção: você marcou a alternativa incorreta'}
+                            </div>
+                            
+                            ${!isRight ? `
+                            <div class="error-analysis">
+                                <strong>Onde esteve o equívoco:</strong> Você marcou a <strong>Alternativa ${chosenLetter}</strong> ("${chosenText}").<br><br>
+                                <strong>A resposta correta é a Alternativa ${correctLetter}</strong> ("${correctText}").
+                            </div>
+                            ` : ''}
+
+                            <div class="fb-step">
+                                <strong>Explicação Completa:</strong><br>
+                                ${q.comentario}
+                            </div>
+
+                            ${diagHtml}
+
+                            <div class="fb-dica">
+                                💡 <strong>Bizu de Ouro:</strong> ${q.dica}
+                            </div>
+                        </div>
+                    `;
                 }
 
                 html += `
-                    <div class="${cardClass}" id="q-card-${q.id}">
+                    <div class="${cardClass}">
                         <div class="q-header">
                             <div class="q-badge-box">
                                 <span class="tag-mat">${q.materia}</span>
                                 <span class="tag-tema">${q.tema}</span>
+                                <span style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted);">Questão #${q.id}</span>
                             </div>
-                            <button type="button" class="fav-touch-btn ${isFav ? 'active' : ''}" onclick="toggleFav(${q.id})" title="Favoritar">
+                            <button type="button" class="fav-touch-btn" onclick="toggleFav(${q.id})">
                                 ${isFav ? '⭐' : '☆'}
                             </button>
                         </div>
-                        <div class="q-text">${q.enunciado}</div>
-                        <div class="options-box">${optsHtml}</div>
+                        <div class="q-enunciado">${q.enunciado.replace(/\n/g, '<br>')}</div>
+                        <div class="q-options">
+                            ${optsHtml}
+                        </div>
                         ${fbHtml}
                     </div>
                 `;
@@ -2055,6 +2933,27 @@
             list.innerHTML = html;
         }
 
+        function prevQPage() {
+            if (qPage > 1) {
+                qPage--;
+                renderList();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function nextQPage() {
+            const filtered = getFilteredQuestions();
+            const totalPages = Math.ceil(filtered.length / Q_PER_PAGE);
+            if (qPage < totalPages) {
+                qPage++;
+                renderList();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        /* ==========================================
+           RESPOSTA DA QUESTÃO
+           ========================================== */
         function handleAnswer(qId, optIdx) {
             const q = DB_QUESTIONS.find(item => item.id === qId);
             if (!q) return;
@@ -2062,7 +2961,8 @@
             const isCorrect = (optIdx === q.correta);
             const todayStr = new Date().toLocaleDateString('pt-BR');
 
-            state.answers[qId] = {
+            const targetAnswers = state.isGuest ? state.guestAnswers : state.answers;
+            targetAnswers[qId] = {
                 choice: optIdx,
                 isCorrect: isCorrect,
                 timestamp: Date.now(),
@@ -2076,7 +2976,12 @@
             }
 
             saveStorage();
-            renderQuestions();
+
+            if (viewMode === 'card') {
+                renderCard();
+            } else {
+                renderList();
+            }
 
             if (!isCorrect && state.consecutiveErrors >= 5) {
                 showErrorStreakModal();
@@ -2089,7 +2994,8 @@
         }
 
         function checkMilestoneCelebration() {
-            const ansKeys = Object.keys(state.answers);
+            const targetAnswers = state.isGuest ? state.guestAnswers : state.answers;
+            const ansKeys = Object.keys(targetAnswers);
             let totalCorrect = 0;
             ansKeys.forEach(id => {
                 const a = getAnsObj(id);
@@ -2107,7 +3013,7 @@
         }
 
         function showCelebrationModal(count) {
-            const name = state.userName || "Filha";
+            const name = state.userName || "Camily";
             setText('celebrationTitle', `Parabéns ${name}, você acertou ${count} questões!`);
             setHtml('celebrationMsg', `Você acabou de completar mais 10 acertos, totalizando <strong>${count} acertos</strong>! Cada questão resolvida com dedicação coloca você cada vez mais perto da sua vaga no Bento Quirino! Continue com esse foco maravilhoso! 🌟`);
             setClass('modalCelebration', 'active', true);
@@ -2118,7 +3024,7 @@
         }
 
         function showErrorStreakModal() {
-            const name = state.userName || "Filha";
+            const name = state.userName || "Camily";
             setText('errorModalTitle', `Calma, ${name}! Vamos respirar fundo?`);
             setClass('modalErrorStreak', 'active', true);
         }
@@ -2135,42 +3041,8 @@
         function toggleFav(qId) {
             state.favs[qId] = !state.favs[qId];
             saveStorage();
-            renderQuestions();
-        }
-
-        function setFilter(mat) {
-            qFilter = mat;
-            qPage = 1;
-            document.querySelectorAll('#matFilters .pill-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.innerText.includes(mat)) btn.classList.add('active');
-            });
-            renderQuestions();
-        }
-
-        function handleSearch() {
-            const inp = $('qSearchInput');
-            qSearch = inp ? inp.value : '';
-            qPage = 1;
-            renderQuestions();
-        }
-
-        function prevQPage() {
-            if (qPage > 1) {
-                qPage--;
-                renderQuestions();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
-
-        function nextQPage() {
-            const filtered = getFilteredQuestions();
-            const totalPages = Math.ceil(filtered.length / Q_PER_PAGE);
-            if (qPage < totalPages) {
-                qPage++;
-                renderQuestions();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
+            if (viewMode === 'card') renderCard();
+            else renderList();
         }
 
         /* ==========================================
@@ -2185,8 +3057,9 @@
 
             const datesSet = new Set();
             const todayStr = new Date().toLocaleDateString('pt-BR');
+            const targetAnswers = state.isGuest ? state.guestAnswers : state.answers;
             
-            Object.keys(state.answers).forEach(id => {
+            Object.keys(targetAnswers).forEach(id => {
                 const a = getAnsObj(id);
                 if (a && a.dateStr) datesSet.add(a.dateStr);
             });
@@ -2201,7 +3074,7 @@
             select.innerHTML = '';
             sortedDates.forEach(d => {
                 let count = 0;
-                Object.keys(state.answers).forEach(id => {
+                Object.keys(targetAnswers).forEach(id => {
                     const a = getAnsObj(id);
                     if (a && a.dateStr === d) count++;
                 });
@@ -2217,7 +3090,7 @@
             }
             select.value = selectedHistoryDate;
 
-            const totalAns = Object.keys(state.answers).length;
+            const totalAns = Object.keys(targetAnswers).length;
             const slider = $('cleanLastSlider');
             if (slider) {
                 slider.max = Math.max(totalAns, 1);
@@ -2244,9 +3117,10 @@
             if (!list) return;
 
             const date = selectedHistoryDate || new Date().toLocaleDateString('pt-BR');
+            const targetAnswers = state.isGuest ? state.guestAnswers : state.answers;
 
             let dayQuestions = [];
-            Object.keys(state.answers).forEach(id => {
+            Object.keys(targetAnswers).forEach(id => {
                 const a = getAnsObj(id);
                 if (a && a.dateStr === date) {
                     const q = DB_QUESTIONS.find(item => item.id == id);
@@ -2286,38 +3160,33 @@
                 const q = item.q;
                 const a = item.a;
                 const isRight = a.isCorrect;
-                const chosenLetter = String.fromCharCode(65 + a.choice);
-                const chosenText = q.opcoes[a.choice] ? q.opcoes[a.choice].replace(/^[A-E]\)\s*/, '') : '';
+                const userChoice = a.choice;
+                const chosenLetter = String.fromCharCode(65 + userChoice);
+                const chosenText = q.opcoes[userChoice] ? q.opcoes[userChoice].replace(/^[A-E]\)\s*/, '') : '';
                 const correctLetter = String.fromCharCode(65 + q.correta);
-                const correctText = q.opcoes[q.correta].replace(/^[A-E]\)\s*/, '');
-                const svgMarkup = getSvgIllustration(q.svg_type);
+                const correctText = q.opcoes[q.correta] ? q.opcoes[q.correta].replace(/^[A-E]\)\s*/, '') : '';
+                const timeStr = new Date(a.timestamp).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
                 html += `
-                    <div class="q-item ${isRight ? 'correct' : 'wrong'}">
-                        <div class="q-header">
-                            <div class="q-badge-box">
+                    <div class="day-q-card ${isRight ? 'correct' : 'wrong'}">
+                        <div class="day-q-top">
+                            <div style="display:flex; align-items:center; gap:8px;">
                                 <span class="tag-mat">${q.materia}</span>
-                                <span class="tag-tema">Questão #${q.id} • ${q.tema}</span>
+                                <span class="day-q-badge ${isRight ? 'correct' : 'wrong'}">
+                                    ${isRight ? '✅ Acertou' : '❌ Errou'}
+                                </span>
                             </div>
-                            <span style="font-size:0.75rem; font-weight:800; color:${isRight ? 'var(--success)' : 'var(--danger)'}">
-                                ${isRight ? '✅ ACERTOU' : '❌ ERROU'}
-                            </span>
+                            <span class="day-q-time">Respondida às ${timeStr}</span>
                         </div>
-                        <div class="q-text">${q.enunciado}</div>
-                        
-                        <div class="fb-box ${isRight ? 'correct' : 'wrong'}">
-                            <strong>Você marcou: Letra ${chosenLetter} ("${chosenText}")</strong><br>
-                            <strong>Gabarito Oficial: Letra ${correctLetter} ("${correctText}")</strong>
-                            
-                            <div style="margin-top:8px;">
-                                <strong>💡 Explicação da Resposta:</strong><br>
-                                ${q.comentario}
-                            </div>
-
-                            <div class="illustration-wrap">
-                                <div class="illustration-title">📐 Desenho Explicativo</div>
-                                ${svgMarkup}
-                            </div>
+                        <div style="font-weight:700; margin-bottom:8px; font-size:0.92rem; color:var(--text-main);">
+                            Questão #${q.id}: ${q.enunciado.split('\n')[0]}
+                        </div>
+                        <div style="font-size:0.86rem; color:var(--text-main); margin-bottom:8px; background:var(--surface-alt); padding:10px; border-radius:var(--radius-sm);">
+                            <div><strong>Sua escolha:</strong> Alternativa ${chosenLetter} - ${chosenText}</div>
+                            ${!isRight ? `<div style="color:var(--success); font-weight:700; margin-top:4px;">Gabarito Oficial: Alternativa ${correctLetter} - ${correctText}</div>` : ''}
+                        </div>
+                        <div style="font-size:0.8rem; color:var(--text-muted); font-style:italic;">
+                            💡 Bizu: ${q.dica}
                         </div>
                     </div>
                 `;
@@ -2327,26 +3196,26 @@
         }
 
         function cleanSelectedDayAnswers() {
-            const date = selectedHistoryDate;
-            if (!confirm(`Deseja realmente apagar todas as respostas registradas no dia ${date}?`)) return;
-
-            Object.keys(state.answers).forEach(id => {
-                const a = getAnsObj(id);
-                if (a && a.dateStr === date) {
-                    delete state.answers[id];
-                }
-            });
-
-            saveStorage();
-            populateHistoryDates();
-            renderDailyHistory();
-            renderQuestions();
-            alert(`Respostas do dia ${date} foram removidas com sucesso!`);
+            const date = selectedHistoryDate || new Date().toLocaleDateString('pt-BR');
+            if (confirm(`Tem certeza que deseja apagar o histórico de respostas do dia ${date}? Esta ação não pode ser desfeita.`)) {
+                const targetAnswers = state.isGuest ? state.guestAnswers : state.answers;
+                Object.keys(targetAnswers).forEach(id => {
+                    const a = getAnsObj(id);
+                    if (a && a.dateStr === date) {
+                        delete targetAnswers[id];
+                    }
+                });
+                saveStorage();
+                populateHistoryDates();
+                renderDailyHistory();
+                renderQuestions();
+                alert(`Histórico do dia ${date} limpo com sucesso!`);
+            }
         }
 
         function updateSliderLabel() {
             const slider = $('cleanLastSlider');
-            const val = slider ? slider.value : '5';
+            const val = slider ? slider.value : 5;
             setText('sliderValDisplay', val);
             setText('sliderBtnVal', val);
         }
@@ -2354,38 +3223,41 @@
         function cleanLastNAnswers() {
             const slider = $('cleanLastSlider');
             const n = slider ? parseInt(slider.value) : 5;
-            const ansEntries = [];
-            Object.keys(state.answers).forEach(id => {
+            const targetAnswers = state.isGuest ? state.guestAnswers : state.answers;
+            const ansArray = [];
+            Object.keys(targetAnswers).forEach(id => {
                 const a = getAnsObj(id);
-                if (a) ansEntries.push({ id, timestamp: a.timestamp || 0 });
+                if (a) ansArray.push({ id, timestamp: a.timestamp });
             });
 
-            if (ansEntries.length === 0) {
-                alert("Nenhuma resposta registrada para apagar.");
+            if (ansArray.length === 0) {
+                alert("Nenhuma resposta recente para apagar.");
                 return;
             }
 
-            if (!confirm(`Deseja realmente apagar as últimas ${n} respostas respondidas?`)) return;
-
-            ansEntries.sort((x, y) => y.timestamp - x.timestamp);
-            const toDelete = ansEntries.slice(0, n);
-
-            toDelete.forEach(item => {
-                delete state.answers[item.id];
-            });
-
-            saveStorage();
-            populateHistoryDates();
-            renderDailyHistory();
-            renderQuestions();
-            alert(`As últimas ${toDelete.length} respostas foram apagadas!`);
+            if (confirm(`Deseja apagar as últimas ${Math.min(n, ansArray.length)} questões respondidas?`)) {
+                ansArray.sort((a, b) => b.timestamp - a.timestamp);
+                const toRemove = ansArray.slice(0, n);
+                toRemove.forEach(item => {
+                    delete targetAnswers[item.id];
+                });
+                saveStorage();
+                populateHistoryDates();
+                renderDailyHistory();
+                renderQuestions();
+                alert(`${toRemove.length} questões recentes foram removidas.`);
+            }
         }
 
         /* ==========================================
-           SINCRONIZAÇÃO ONLINE / MULTI-APARELHOS
+           SINCRONIZAÇÃO E BACKUP ONLINE
            ========================================== */
         function openSyncModal() {
             setClass('modalSync', 'active', true);
+            const encoded = getEncodedProgress();
+            const link = window.location.origin + window.location.pathname + '#sync=' + encoded;
+            setVal('shareUrlInput', link);
+            setVal('exportCodeArea', encoded);
         }
 
         function closeSyncModal() {
@@ -2393,92 +3265,110 @@
         }
 
         function getEncodedProgress() {
-            const cleanState = {
-                userName: state.userName,
-                dailyGoal: state.dailyGoal,
-                answers: state.answers,
-                favs: state.favs,
-                celebratedMilestones: state.celebratedMilestones
+            const data = {
+                v: 5,
+                u: "Camily",
+                g: state.dailyGoal,
+                a: state.answers,
+                f: state.favs,
+                c: state.consecutiveErrors,
+                m: state.celebratedMilestones,
+                t: Date.now()
             };
-            return btoa(unescape(encodeURIComponent(JSON.stringify(cleanState))));
+            return btoa(unescape(encodeURIComponent(JSON.stringify(data))));
         }
 
         function copySyncLink() {
-            const code = getEncodedProgress();
-            const baseUrl = window.location.href.split('#')[0];
-            const fullLink = `${baseUrl}#sync=${code}`;
-
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(fullLink).then(() => {
-                    alert("Link de sincronização copiado! Envie pelo WhatsApp ou abra no outro aparelho para carregar seu progresso instantaneamente.");
-                }).catch(() => prompt("Copie seu link abaixo:", fullLink));
-            } else {
-                prompt("Copie seu link abaixo:", fullLink);
-            }
+            const encoded = getEncodedProgress();
+            const link = window.location.origin + window.location.pathname + '#sync=' + encoded;
+            navigator.clipboard.writeText(link).then(() => {
+                alert("✨ Link copiado com sucesso! Abra no outro celular para carregar suas respostas.");
+            }).catch(() => {
+                prompt("Copie o link abaixo:", link);
+            });
         }
 
         function copyProgressCode() {
             const code = getEncodedProgress();
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(code).then(() => {
-                    alert("Código de progresso copiado!");
-                }).catch(() => prompt("Copie o código:", code));
-            } else {
-                prompt("Copie o código:", code);
-            }
+            navigator.clipboard.writeText(code).then(() => {
+                alert("📋 Código copiado! Cole no outro dispositivo.");
+            }).catch(() => {
+                prompt("Copie o código abaixo:", code);
+            });
         }
 
         function restoreProgressFromCode() {
-            const inp = $('importCodeInput');
-            const raw = inp ? inp.value.trim() : '';
-            if (!raw) return alert("Por favor, cole um código válido.");
+            const inp = $('importCodeArea');
+            const code = inp ? inp.value.trim() : '';
+            if (!code) {
+                alert("Por favor, cole o código ou link no campo.");
+                return;
+            }
+
             try {
-                const decoded = JSON.parse(decodeURIComponent(escape(atob(raw))));
-                if (decoded && decoded.answers) {
-                    state.userName = decoded.userName || state.userName;
-                    state.dailyGoal = decoded.dailyGoal || state.dailyGoal;
-                    state.answers = { ...state.answers, ...decoded.answers };
-                    state.favs = { ...state.favs, ...decoded.favs };
-                    saveStorage();
-                    renderQuestions();
-                    closeSyncModal();
-                    alert("Progresso restaurado com sucesso em seu aparelho!");
+                let jsonStr = '';
+                if (code.includes('#sync=')) {
+                    const raw = code.split('#sync=')[1];
+                    jsonStr = decodeURIComponent(escape(atob(raw)));
                 } else {
-                    alert("Código inválido.");
+                    jsonStr = decodeURIComponent(escape(atob(code)));
+                }
+
+                const parsed = JSON.parse(jsonStr);
+                if (parsed && parsed.a) {
+                    state.answers = parsed.a || {};
+                    state.favs = parsed.f || {};
+                    state.dailyGoal = parsed.g || 20;
+                    state.consecutiveErrors = parsed.c || 0;
+                    state.celebratedMilestones = parsed.m || [];
+                    state.userName = "Camily";
+                    state.isGuest = false;
+
+                    saveStorage();
+                    closeSyncModal();
+                    alert("🚀 Progresso sincronizado com sucesso! Suas questões e histórico foram atualizados.");
+                    renderQuestions();
+                } else {
+                    alert("Formato de código inválido.");
                 }
             } catch(e) {
-                alert("Erro ao decodificar. Verifique se o código foi copiado por completo.");
+                alert("Erro ao decodificar o progresso. Verifique se o código foi copiado corretamente.");
             }
         }
 
         function checkUrlSync() {
-            const hash = window.location.hash;
-            if (hash && hash.includes('sync=')) {
-                const code = hash.split('sync=')[1];
-                if (code) {
-                    try {
-                        const decoded = JSON.parse(decodeURIComponent(escape(atob(code))));
-                        if (decoded && decoded.answers) {
-                            const count = Object.keys(decoded.answers).length;
-                            if (confirm(`Detectamos um progresso salvo de ${count} questões para ${decoded.userName || 'o estudante'}! Deseja sincronizar e carregar agora neste aparelho?`)) {
-                                state.userName = decoded.userName || state.userName;
-                                state.dailyGoal = decoded.dailyGoal || state.dailyGoal;
-                                state.answers = { ...state.answers, ...decoded.answers };
-                                state.favs = { ...state.favs, ...decoded.favs };
-                                saveStorage();
-                                window.location.hash = '';
-                            }
+            if (window.location.hash && window.location.hash.includes('sync=')) {
+                try {
+                    const raw = window.location.hash.split('sync=')[1];
+                    if (raw) {
+                        const jsonStr = decodeURIComponent(escape(atob(raw)));
+                        const parsed = JSON.parse(jsonStr);
+                        if (parsed && parsed.a) {
+                            state.answers = parsed.a || {};
+                            state.favs = parsed.f || {};
+                            state.dailyGoal = parsed.g || 20;
+                            state.consecutiveErrors = parsed.c || 0;
+                            state.celebratedMilestones = parsed.m || [];
+                            state.userName = "Camily";
+                            state.isGuest = false;
+                            saveStorage();
+                            window.history.replaceState(null, null, window.location.pathname);
+                            setTimeout(() => {
+                                alert("🎉 Progresso restaurado via link com sucesso!");
+                            }, 500);
                         }
-                    } catch(e) {}
-                }
+                    }
+                } catch(e) {}
             }
         }
 
-        /* Cards / Bizus Ilustrados */
+        /* ==========================================
+           DICAS RÁPIDAS (1000 CARDS ILUSTRADOS)
+           ========================================== */
         let tFilter = 'Todas';
         let tSearch = '';
         let tPage = 1;
-        const T_PER_PAGE = 20;
+        const T_PER_PAGE = 10;
 
         function getFilteredTips() {
             return DB_TIPS.filter(t => {
@@ -2576,7 +3466,8 @@
 
         /* Atualização das Métricas Gerais */
         function updateStatsUI() {
-            const ansKeys = Object.keys(state.answers);
+            const targetAnswers = state.isGuest ? state.guestAnswers : state.answers;
+            const ansKeys = Object.keys(targetAnswers);
             const totalDone = ansKeys.length;
             let correct = 0;
             let wrong = 0;
@@ -2605,10 +3496,7 @@
             setText('sWrong', wrong);
             setText('sTodayCount', todayCount);
 
-            setText('badgeErradas', wrong);
-            setText('badgeAcertos', correct);
-            setText('badgeFavs', favCount);
-
+            updateFilterBadges();
             updateDailyGoalUI();
         }
 
@@ -2629,9 +3517,20 @@
             }
         }
 
+        /* Suporte a navegação por teclado (setas direita/esquerda) */
+        window.addEventListener('keydown', (e) => {
+            if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) return;
+            const cardsPanel = $('panel-questoes');
+            if (cardsPanel && cardsPanel.classList.contains('active') && viewMode === 'card') {
+                if (e.key === 'ArrowRight') nextCard('right');
+                if (e.key === 'ArrowLeft') prevCard('left');
+            }
+        });
+
         window.addEventListener('DOMContentLoaded', () => {
             loadStorage();
             initTheme();
+            initRandomDeck(); // Ativa modo aleatório SEMPRE que entrar no site!
             renderQuestions();
             renderTips();
             updateStatsUI();
