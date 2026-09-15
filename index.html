@@ -1398,6 +1398,61 @@
             text-align: center;
         }
 
+
+        /* Destaque de Alternativa Selecionada (1º Clique) */
+        .opt-btn.is-selected {
+            border: 2.5px solid var(--primary) !important;
+            background: var(--primary-light) !important;
+            color: var(--primary) !important;
+            box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.25) !important;
+            font-weight: 700;
+            transform: scale(1.01);
+        }
+
+        .dark-mode .opt-btn.is-selected {
+            background: #1e293b !important;
+            color: #93c5fd !important;
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.35) !important;
+        }
+
+        .opt-confirm-tag {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 800;
+            background: var(--primary);
+            color: #ffffff;
+            padding: 3px 8px;
+            border-radius: 6px;
+            margin-top: 6px;
+            box-shadow: 0 2px 5px rgba(29, 78, 216, 0.3);
+            width: fit-content;
+        }
+
+        .btn-confirm-selection {
+            width: 100%;
+            min-height: 48px;
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 0.98rem;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(29, 78, 216, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .btn-confirm-selection:hover, .btn-confirm-selection:active {
+            filter: brightness(1.08);
+            transform: translateY(-1px);
+        }
+
     </style>
 </head>
 <body>
@@ -1412,7 +1467,7 @@
             </div>
         </div>
         <div class="header-actions">
-            <button type="button" class="btn-cloud" onclick="openSyncModal()" title="Salvar online ou sincronizar">
+            <button type="button" class="btn-cloud" onclick="startSaveOnline()" title="Salvar online ou sincronizar">
                 ☁️ Salvar Online
             </button>
             <button class="btn-icon" id="themeBtn" title="Alternar tema">🌙</button>
@@ -1777,6 +1832,27 @@
         </div>
     </div>
 
+
+    <!-- MODAL: CONFIRMAR SE É CAMILY PARA SALVAR ONLINE -->
+    <div class="modal-overlay" id="modalSaveOnlineConfirm">
+        <div class="modal-card" style="text-align:center;">
+            <div class="modal-emoji">☁️🌸</div>
+            <h3 class="modal-title">Salvar Online & Sincronizar</h3>
+            <p class="modal-msg" style="font-size:1.02rem; line-height:1.5;">
+                Você é a <strong>Camily</strong>?<br><br>
+                Para salvar online e manter todo o seu histórico, metas diárias e evolução gravados de forma permanente, confirme se você é a Camily:
+            </p>
+            <div style="display:flex; flex-direction:column; gap:10px; margin-top:16px;">
+                <button type="button" class="modal-btn-primary" style="background:var(--success); font-size:1.02rem; padding:14px;" onclick="confirmSaveOnlineAsCamily()">
+                    ✅ Sim, sou a Camily (Salvar Online)
+                </button>
+                <button type="button" class="modal-btn-secondary" style="font-size:0.95rem; padding:12px;" onclick="cancelSaveOnline()">
+                    ❌ Não, não sou a Camily (Não Salvar)
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- MODAL: SALVAR ONLINE / SINCRONIZAR EM QUALQUER APARELHO -->
     <div class="modal-overlay" id="modalSync">
         <div class="modal-card" style="text-align:left;">
@@ -1804,6 +1880,16 @@
                 <textarea id="importCodeInput" placeholder="Ou cole o código de progresso aqui para restaurar..." style="width:100%; height:55px; border-radius:var(--radius-sm); border:1px solid var(--border); font-size:0.8rem; padding:6px; outline:none;"></textarea>
                 <button type="button" onclick="restoreProgressFromCode()" style="width:100%; padding:10px; background:var(--success); color:white; border:none; border-radius:var(--radius-sm); font-weight:800; font-size:0.85rem; cursor:pointer; margin-top:6px;">
                     Restaurar do Código Colado
+                </button>
+            </div>
+
+            
+            <!-- Opção 3: Baixar Arquivo de Backup -->
+            <div style="background:var(--surface-alt); padding:14px; border-radius:var(--radius-md); margin-bottom:12px; border:1px solid var(--border);">
+                <strong style="color:var(--primary); font-size:0.95rem; display:block; margin-bottom:4px;">3. 💾 Arquivo de Backup (.json):</strong>
+                <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:8px;">Baixe um arquivo seguro com todas as suas respostas e evolução:</p>
+                <button type="button" onclick="downloadBackupJson()" style="width:100%; padding:10px; background:var(--surface); border:1.5px solid var(--border); border-radius:var(--radius-sm); font-weight:800; font-size:0.85rem; cursor:pointer; color:var(--text-main);">
+                    ⬇️ Baixar Meu Arquivo de Progresso (.json)
                 </button>
             </div>
 
@@ -2109,10 +2195,12 @@
         let qPage = 1;
         const Q_PER_PAGE = 15;
 
-        /* Baralho Aleatório */
+        /* Baralho Aleatório e Controle de Card Ativo */
         let randomizedQuestions = [];
         let currentCardIndex = 0;
         let currentDirection = 'right';
+        let selectedOptionIdx = null; // Alternativa selecionada no 1º clique
+        let viewingQuestionId = null;  // ID fixo da questão visualizada no card (impede pular antes da hora)
 
         function shuffleArray(array) {
             const arr = [...array];
@@ -2126,11 +2214,15 @@
         function initRandomDeck() {
             randomizedQuestions = shuffleArray(DB_QUESTIONS);
             currentCardIndex = 0;
+            selectedOptionIdx = null;
+            viewingQuestionId = null;
         }
 
         function shuffleDeck() {
             randomizedQuestions = shuffleArray(DB_QUESTIONS);
             currentCardIndex = 0;
+            selectedOptionIdx = null;
+            viewingQuestionId = null;
             renderQuestions();
         }
 
@@ -2244,6 +2336,8 @@
                 state.guestName = val;
                 state.userName = val;
                 state.guestAnswers = {}; // Treino temporário separado
+                selectedOptionIdx = null;
+                viewingQuestionId = null;
                 updateNameUI();
                 updateStatsUI();
                 renderQuestions();
@@ -2257,11 +2351,56 @@
             state.guestName = "";
             state.guestAnswers = {};
             state.userName = "Camily";
+            selectedOptionIdx = null;
+            viewingQuestionId = null;
             loadStorage();
             updateNameUI();
             updateStatsUI();
             renderQuestions();
             updateDailyGoalUI();
+        }
+
+        /* ==========================================
+           CONFIRMAÇÃO E SALVAMENTO ONLINE (CAMILY)
+           ========================================== */
+        function startSaveOnline() {
+            setClass('modalSaveOnlineConfirm', 'active', true);
+        }
+
+        function cancelSaveOnline() {
+            setClass('modalSaveOnlineConfirm', 'active', false);
+            alert("ℹ️ Operação cancelada. Nenhuma resposta foi salva para o perfil da Camily.");
+        }
+
+        function confirmSaveOnlineAsCamily() {
+            // Garante perfil oficial Camily
+            state.userName = "Camily";
+            state.isGuest = false;
+            state.guestName = "";
+            state.guestAnswers = {};
+
+            // Salva permanentemente no dispositivo
+            try {
+                const camilyData = {
+                    userName: "Camily",
+                    dailyGoal: state.dailyGoal || 20,
+                    answers: state.answers,
+                    favs: state.favs,
+                    consecutiveErrors: state.consecutiveErrors || 0,
+                    celebratedMilestones: state.celebratedMilestones || []
+                };
+                localStorage.setItem('bq_camily_v5', JSON.stringify(camilyData));
+            } catch(e) {}
+
+            updateNameUI();
+            updateStatsUI();
+            updateDailyGoalUI();
+            setClass('modalSaveOnlineConfirm', 'active', false);
+
+            // Abre modal de sincronização e avisa
+            openSyncModal();
+            const totalAns = Object.keys(state.answers).length;
+            alert(`🎉 Salvo online com sucesso, Camily! Seu histórico com ${totalAns} questões respondidas está gravado permanentemente.`);
         }
 
         /* ==========================================
@@ -2391,6 +2530,16 @@
             }
         }
 
+        /* Compatibilidade com chamadas antigas */
+        function setFilter(arg) {
+            if (arg === 'Todas') setStatusFilter('todas');
+            else if (arg === 'Erradas') setStatusFilter('erradas');
+            else if (arg === 'Acertos') setStatusFilter('acertos');
+            else if (arg === 'Favoritas') setStatusFilter('favoritas');
+            else setSubjectFilter(arg);
+        }
+        function saveNewUserName() { saveGuestUserName(); }
+
         /* ==========================================
            CONTROLE DE FILTROS E MODO CARDS
            ========================================== */
@@ -2412,22 +2561,15 @@
                 if (cardContainer) cardContainer.style.display = 'none';
                 if (listContainer) listContainer.style.display = 'block';
             }
+            selectedOptionIdx = null;
             renderQuestions();
         }
 
-        
-        /* Compatibilidade com chamadas antigas */
-        function setFilter(arg) {
-            if (arg === 'Todas') setStatusFilter('todas');
-            else if (arg === 'Erradas') setStatusFilter('erradas');
-            else if (arg === 'Acertos') setStatusFilter('acertos');
-            else if (arg === 'Favoritas') setStatusFilter('favoritas');
-            else setSubjectFilter(arg);
-        }
-        function saveNewUserName() { saveGuestUserName(); }
-function setStatusFilter(status) {
+        function setStatusFilter(status) {
             statusFilter = status;
             currentCardIndex = 0;
+            selectedOptionIdx = null;
+            viewingQuestionId = null; // Reseta ID fixo para ir para a 1ª do filtro
             qPage = 1;
 
             const pillMap = {
@@ -2450,6 +2592,8 @@ function setStatusFilter(status) {
         function setSubjectFilter(subject) {
             subjectFilter = subject;
             currentCardIndex = 0;
+            selectedOptionIdx = null;
+            viewingQuestionId = null; // Reseta ID fixo para ir para a 1ª da matéria
             qPage = 1;
 
             document.querySelectorAll('#subjectFilterRow .pill-btn').forEach(btn => {
@@ -2466,6 +2610,8 @@ function setStatusFilter(status) {
             const inp = $('qSearchInput');
             qSearch = inp ? inp.value.trim() : '';
             currentCardIndex = 0;
+            selectedOptionIdx = null;
+            viewingQuestionId = null;
             qPage = 1;
             renderQuestions();
         }
@@ -2545,50 +2691,59 @@ function setStatusFilter(status) {
             if (!wrapper) return;
 
             const filtered = getFilteredQuestions();
-            const total = filtered.length;
 
-            if (total === 0) {
-                let statusLabel = 'para este filtro';
-                if (statusFilter === 'nao_respondidas') statusLabel = 'não respondidas! 🎉 Você completou todas as questões desta matéria';
-                if (statusFilter === 'erradas') statusLabel = 'erradas registradas! Parabéns!';
-
-                wrapper.innerHTML = `
-                    <div class="empty-deck-card">
-                        <div style="font-size: 3rem; margin-bottom: 12px;">🏆✨</div>
-                        <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 8px;">Nenhuma questão encontrada!</h3>
-                        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5;">
-                            Não há questões ${statusLabel}. Escolha outro filtro abaixo para continuar estudando:
-                        </p>
-                        <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
-                            <button type="button" class="pill-btn pill-acertos" onclick="setStatusFilter('acertos')">Ver Acertos</button>
-                            <button type="button" class="pill-btn pill-erradas" onclick="setStatusFilter('erradas')">Revisar Erros</button>
-                            <button type="button" class="pill-btn" onclick="setStatusFilter('todas')">Ver Todas (1000)</button>
-                            <button type="button" class="pill-btn active" onclick="shuffleDeck()">🔀 Re-embaralhar</button>
-                        </div>
-                    </div>
-                `;
-
-                setText('cardDeckInfo', `0 questões encontradas`);
-                const fill = $('cardProgressFill');
-                if (fill) fill.style.width = '100%';
-                const prev = $('btnCardPrev');
-                if (prev) prev.disabled = true;
-                const next = $('btnCardNext');
-                if (next) next.disabled = true;
-                return;
+            // Localiza a questão ativa fixa ou obtém a atual do filtro
+            let q = null;
+            if (viewingQuestionId !== null) {
+                q = DB_QUESTIONS.find(item => item.id === viewingQuestionId);
             }
 
-            if (currentCardIndex >= total) currentCardIndex = total - 1;
-            if (currentCardIndex < 0) currentCardIndex = 0;
+            if (!q) {
+                if (filtered.length === 0) {
+                    let statusLabel = 'para este filtro';
+                    if (statusFilter === 'nao_respondidas') statusLabel = 'não respondidas! 🎉 Você concluiu todas as questões desta matéria';
+                    if (statusFilter === 'erradas') statusLabel = 'erradas registradas! Parabéns!';
 
-            const q = filtered[currentCardIndex];
+                    wrapper.innerHTML = `
+                        <div class="empty-deck-card">
+                            <div style="font-size: 3rem; margin-bottom: 12px;">🏆✨</div>
+                            <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 8px;">Nenhuma questão encontrada!</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5;">
+                                Não há questões ${statusLabel}. Escolha outro filtro abaixo para continuar estudando:
+                            </p>
+                            <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+                                <button type="button" class="pill-btn pill-acertos" onclick="setStatusFilter('acertos')">Ver Acertos</button>
+                                <button type="button" class="pill-btn pill-erradas" onclick="setStatusFilter('erradas')">Revisar Erros</button>
+                                <button type="button" class="pill-btn" onclick="setStatusFilter('todas')">Ver Todas (1000)</button>
+                                <button type="button" class="pill-btn active" onclick="shuffleDeck()">🔀 Re-embaralhar</button>
+                            </div>
+                        </div>
+                    `;
+
+                    setText('cardDeckInfo', `0 questões encontradas`);
+                    const fill = $('cardProgressFill');
+                    if (fill) fill.style.width = '100%';
+                    const prev = $('btnCardPrev');
+                    if (prev) prev.disabled = true;
+                    const next = $('btnCardNext');
+                    if (next) next.disabled = true;
+                    return;
+                }
+
+                if (currentCardIndex >= filtered.length) currentCardIndex = Math.max(0, filtered.length - 1);
+                q = filtered[currentCardIndex];
+                viewingQuestionId = q ? q.id : null;
+            }
+
+            if (!q) return;
+
             const a = getAnsObj(q.id);
             const isAns = !!a;
             const userChoice = isAns ? a.choice : -1;
             const isRight = isAns && a.isCorrect;
             const isFav = !!state.favs[q.id];
 
-            // Informações do Deck
+            // Rótulo do Filtro
             let filterName = 'Todas';
             if (statusFilter === 'nao_respondidas') filterName = '⭕ Não respondidas';
             if (statusFilter === 'respondidas') filterName = '📝 Respondidas';
@@ -2596,15 +2751,19 @@ function setStatusFilter(status) {
             if (statusFilter === 'erradas') filterName = '❌ Erradas';
             if (statusFilter === 'favoritas') filterName = '⭐ Favoritas';
 
-            setText('cardDeckInfo', `Questão ${currentCardIndex + 1} de ${total} (${filterName})`);
-            const progressPct = Math.round(((currentCardIndex + 1) / total) * 100);
+            const totalInFilter = filtered.length;
+            const displayTotal = (statusFilter === 'nao_respondidas' && isAns) ? totalInFilter + 1 : Math.max(totalInFilter, 1);
+            const displayCurrent = Math.min(currentCardIndex + 1, displayTotal);
+
+            setText('cardDeckInfo', `Questão ${displayCurrent} de ${displayTotal} (${filterName})`);
+            const progressPct = Math.round((displayCurrent / displayTotal) * 100);
             const fill = $('cardProgressFill');
             if (fill) fill.style.width = progressPct + '%';
 
             const prev = $('btnCardPrev');
             if (prev) prev.disabled = (currentCardIndex <= 0);
             const next = $('btnCardNext');
-            if (next) next.disabled = (currentCardIndex >= total - 1 && statusFilter !== 'nao_respondidas');
+            if (next) next.disabled = false;
 
             let cardStatusBadge = `<span class="badge-status-pending">⭕ Não respondida</span>`;
             if (isAns) {
@@ -2622,19 +2781,40 @@ function setStatusFilter(status) {
                 let btnClass = 'opt-btn';
                 const letter = String.fromCharCode(65 + idx);
                 const optClean = opt.replace(/^[A-E]\)\s*/, '');
+                let confirmTag = '';
 
                 if (isAns) {
                     if (idx === q.correta) btnClass += ' is-correct';
                     if (idx === userChoice && idx !== q.correta) btnClass += ' is-wrong';
+                } else {
+                    if (idx === selectedOptionIdx) {
+                        btnClass += ' is-selected';
+                        confirmTag = `<span class="opt-confirm-tag">👉 Toque novamente na opção ${letter} para confirmar</span>`;
+                    }
                 }
 
                 optsHtml += `
-                    <button type="button" class="${btnClass}" onclick="handleAnswer(${q.id}, ${idx})">
-                        <span class="opt-char">${letter}</span>
-                        <span>${optClean}</span>
+                    <button type="button" class="${btnClass}" onclick="handleOptionClick(${q.id}, ${idx})">
+                        <div style="display:flex; flex-direction:column; flex:1; width:100%;">
+                            <div style="display:flex; align-items:flex-start; gap:10px;">
+                                <span class="opt-char">${letter}</span>
+                                <span style="flex:1;">${optClean}</span>
+                            </div>
+                            ${confirmTag}
+                        </div>
                     </button>
                 `;
             });
+
+            let confirmBtnHtml = '';
+            if (!isAns && selectedOptionIdx !== null) {
+                const selLetter = String.fromCharCode(65 + selectedOptionIdx);
+                confirmBtnHtml = `
+                    <button type="button" class="btn-confirm-selection" onclick="handleOptionClick(${q.id}, ${selectedOptionIdx})">
+                        <span>✅ Confirmar Alternativa ${selLetter} (ou toque nela novamente)</span>
+                    </button>
+                `;
+            }
 
             let fbHtml = '';
             if (isAns) {
@@ -2705,11 +2885,12 @@ function setStatusFilter(status) {
                         ${optsHtml}
                     </div>
 
+                    ${confirmBtnHtml}
+
                     ${fbHtml}
                 </div>
             `;
 
-            // Ativa suporte a gesto touch de arrastar (swipe) para passar para o lado no celular
             attachSwipeGesture($('currentQuestionCard'));
         }
 
@@ -2740,48 +2921,70 @@ function setStatusFilter(status) {
             cardEl.addEventListener('touchend', () => {
                 const diffX = endX - startX;
                 const diffY = endY - startY;
-                // Se arrastou na horizontal com mais de 45px
                 if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 45) {
                     if (diffX < 0) {
-                        // Arrastou para a esquerda -> Próxima questão
                         nextCard('right');
                     } else {
-                        // Arrastou para a direita -> Questão anterior
                         prevCard('left');
                     }
                 }
             }, { passive: true });
         }
 
+        /* Clique na alternativa: 1º seleciona, 2º confirma */
+        function handleOptionClick(qId, optIdx) {
+            const a = getAnsObj(qId);
+            if (a) return; // Já respondida, não faz nada
+
+            if (selectedOptionIdx === optIdx) {
+                // Segundo clique na mesma alternativa: confirma e responde!
+                selectedOptionIdx = null;
+                handleAnswer(qId, optIdx);
+            } else {
+                // Primeiro clique: seleciona a alternativa
+                selectedOptionIdx = optIdx;
+                renderCard();
+            }
+        }
+
         function nextCard(dir) {
             currentDirection = dir || 'right';
+            selectedOptionIdx = null;
+
             const filtered = getFilteredQuestions();
             if (filtered.length === 0) {
+                viewingQuestionId = null;
                 renderCard();
                 return;
             }
 
             if (statusFilter === 'nao_respondidas') {
-                // Ao avançar, a questão respondida já saiu do deck de não respondidas!
-                // Então o currentCardIndex já aponta para a próxima questão do topo!
+                // A questão que acabou de ser respondida já saiu de 'filtered'.
+                // O currentCardIndex já aponta para a próxima questão do deck!
                 if (currentCardIndex >= filtered.length) {
                     currentCardIndex = Math.max(0, filtered.length - 1);
                 }
+                viewingQuestionId = filtered[currentCardIndex] ? filtered[currentCardIndex].id : null;
             } else {
                 if (currentCardIndex < filtered.length - 1) {
                     currentCardIndex++;
                 } else {
                     currentCardIndex = 0;
                 }
+                viewingQuestionId = filtered[currentCardIndex] ? filtered[currentCardIndex].id : null;
             }
+
             renderCard();
             window.scrollTo({ top: 160, behavior: 'smooth' });
         }
 
         function prevCard(dir) {
             currentDirection = dir || 'left';
+            selectedOptionIdx = null;
+
             const filtered = getFilteredQuestions();
             if (filtered.length === 0) {
+                viewingQuestionId = null;
                 renderCard();
                 return;
             }
@@ -2789,6 +2992,8 @@ function setStatusFilter(status) {
             if (currentCardIndex > 0) {
                 currentCardIndex--;
             }
+            viewingQuestionId = filtered[currentCardIndex] ? filtered[currentCardIndex].id : null;
+
             renderCard();
             window.scrollTo({ top: 160, behavior: 'smooth' });
         }
@@ -2800,6 +3005,8 @@ function setStatusFilter(status) {
                 if (nextIdx === currentCardIndex) nextIdx = (nextIdx + 1) % filtered.length;
                 currentCardIndex = nextIdx;
                 currentDirection = 'right';
+                selectedOptionIdx = null;
+                viewingQuestionId = filtered[currentCardIndex] ? filtered[currentCardIndex].id : null;
                 renderCard();
             }
         }
@@ -2976,6 +3183,10 @@ function setStatusFilter(status) {
             }
 
             saveStorage();
+
+            // Fixa a questão recém-respondida no visor do card para NÃO pular direto!
+            viewingQuestionId = qId;
+            selectedOptionIdx = null;
 
             if (viewMode === 'card') {
                 renderCard();
@@ -3282,7 +3493,7 @@ function setStatusFilter(status) {
             const encoded = getEncodedProgress();
             const link = window.location.origin + window.location.pathname + '#sync=' + encoded;
             navigator.clipboard.writeText(link).then(() => {
-                alert("✨ Link copiado com sucesso! Abra no outro celular para carregar suas respostas.");
+                alert("✨ Link copiado com sucesso! Abra no outro celular ou computador para carregar suas respostas.");
             }).catch(() => {
                 prompt("Copie o link abaixo:", link);
             });
@@ -3297,8 +3508,30 @@ function setStatusFilter(status) {
             });
         }
 
+        function downloadBackupJson() {
+            const camilyData = {
+                userName: "Camily",
+                dailyGoal: state.dailyGoal || 20,
+                answers: state.answers,
+                favs: state.favs,
+                consecutiveErrors: state.consecutiveErrors || 0,
+                celebratedMilestones: state.celebratedMilestones || [],
+                savedAt: new Date().toISOString()
+            };
+            const jsonStr = JSON.stringify(camilyData, null, 2);
+            const blob = new Blob([jsonStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Camily_BentoQuirino_Progresso_${new Date().toLocaleDateString('pt-BR').replace(/\//g, '-')}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
         function restoreProgressFromCode() {
-            const inp = $('importCodeArea');
+            const inp = $('importCodeInput');
             const code = inp ? inp.value.trim() : '';
             if (!code) {
                 alert("Por favor, cole o código ou link no campo.");
